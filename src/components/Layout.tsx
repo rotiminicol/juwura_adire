@@ -8,12 +8,19 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  // Smooth scroll to top on page load
+  // Enhanced smooth scroll to top on page load
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
+    
+    // Add smooth scrolling to the entire document
+    document.documentElement.style.scrollBehavior = "smooth";
+    
+    return () => {
+      document.documentElement.style.scrollBehavior = "";
+    };
   }, []);
 
   return (

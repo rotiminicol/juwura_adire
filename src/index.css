@@ -53,24 +53,41 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
   body {
     @apply bg-juwura-cream text-juwura-indigo;
     font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
   }
+  
+  section {
+    @apply py-16 md:py-24; /* Default section spacing */
+  }
+  
+  .content-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold mb-10 md:mb-16;
+  }
 }
 
-/* Keep existing parallax section, scrolling wrapper, etc. styles */
+/* Enhanced Parallax Section Styles */
 .parallax-section {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 60vh;
   overflow: hidden;
   perspective: 1000px;
 }
@@ -83,6 +100,7 @@
   height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
+  transition: transform 0.2s ease-out;
 }
 
 .parallax-content {
@@ -93,22 +111,44 @@
   width: 100%;
 }
 
+/* Improved Scrolling Wrapper */
 .scrolling-wrapper {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
+  padding: 1.5rem 0;
+  margin: 0 -1rem;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  
   &::-webkit-scrollbar {
-    display: none;
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+    border-radius: 10px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
   }
 }
 
+.scroll-item {
+  display: inline-block;
+  padding: 0 1rem;
+  scroll-snap-align: start;
+}
+
 .product-card {
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-6px);
 }
 
 .adire-pattern {
@@ -127,7 +167,7 @@
   background-size: 20px 20px;
 }
 
-/* 3D Animation Styles */
+/* Enhanced 3D Animation Styles */
 .floating {
   animation: float 6s ease-in-out infinite;
 }
@@ -139,6 +179,7 @@
 
 .scene {
   perspective: 1000px;
+  padding: 2rem 0;
 }
 
 .cube {
@@ -162,6 +203,7 @@
   font-weight: bold;
   color: white;
   text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
 
 .cube-face-front { transform: translateZ(100px); }
@@ -171,15 +213,74 @@
 .cube-face-top { transform: rotateX(90deg) translateZ(100px); }
 .cube-face-bottom { transform: rotateX(-90deg) translateZ(100px); }
 
-/* New Collections Style */
+/* Improved Collection Categories Style */
 .collection-category {
-  @apply relative overflow-hidden rounded-lg shadow-lg cursor-pointer;
+  @apply relative overflow-hidden rounded-lg shadow-lg cursor-pointer transition-all duration-500;
+  height: 350px;
+  margin: 1rem 0;
+}
+
+.collection-category:hover img {
+  transform: scale(1.05);
+}
+
+.collection-category img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
 }
 
 .collection-overlay {
-  @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-6;
+  @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-8;
 }
 
 .collection-title {
-  @apply text-white text-2xl font-bold font-playfair;
+  @apply text-white text-2xl md:text-3xl font-bold font-playfair;
+}
+
+/* Animation classes */
+.fade-in-element {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-fade-in {
+  animation: fadein 0.8s ease forwards;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Spacing utilities */
+.section-spacer {
+  padding: 4rem 0;
+}
+
+.section-spacer-large {
+  padding: 6rem 0;
+}
+
+/* Grid layouts with better spacing */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* Improved tabs for better UX */
+.tab-container {
+  @apply mb-8;
+}
+
+.tab-content {
+  @apply mt-8;
 }

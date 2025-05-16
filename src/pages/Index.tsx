@@ -71,7 +71,7 @@ const Index = () => {
 
   return (
     <div className="overflow-x-hidden">
-      {/* Hero Section */}
+      {/* Hero Section - enhanced spacing */}
       <div 
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center overflow-hidden bg-juwura-cream"
@@ -84,33 +84,33 @@ const Index = () => {
         <div 
           className="absolute inset-0 bg-juwura-brown/40"
           style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
+            transform: `translateY(${scrollY * 0.3}px)`,
           }}
         />
         
-        <div className="container mx-auto px-4 relative z-10 text-center text-white">
-          <div className="mb-8">
+        <div className="container mx-auto px-4 relative z-10 text-center text-white py-16">
+          <div className="mb-12">
             <img 
               src="/lovable-uploads/d669e35d-f019-43a0-a333-cf7ef26df738.png" 
               alt="Jùwúrà Logo" 
-              className="h-32 md:h-40 mx-auto mb-8 invert"
+              className="h-32 md:h-40 mx-auto mb-12 invert"
               style={{
-                transform: `translateY(${scrollY * -0.2}px) scale(${1 - scrollY * 0.0005})`,
+                transform: `translateY(${scrollY * -0.15}px) scale(${1 - scrollY * 0.0003})`,
               }}
             />
           </div>
           
           <h1 
-            className="text-4xl md:text-7xl font-bold mb-4"
+            className="text-5xl md:text-7xl font-bold mb-8"
             style={{
-              transform: `translateY(${scrollY * -0.3}px)`,
+              transform: `translateY(${scrollY * -0.2}px)`,
             }}
           >
             Authentic Adire Fashion
           </h1>
           
           <p 
-            className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl mb-16 max-w-2xl mx-auto"
             style={{
               transform: `translateY(${scrollY * -0.1}px)`,
             }}
@@ -125,7 +125,7 @@ const Index = () => {
           >
             <Link 
               to="/products" 
-              className="bg-juwura-brown text-juwura-cream border-2 border-juwura-cream px-8 py-3 rounded-md text-lg font-medium hover:bg-juwura-cream hover:text-juwura-brown transition-all duration-300"
+              className="bg-juwura-brown text-juwura-cream border-2 border-juwura-cream px-8 py-4 rounded-md text-lg font-medium hover:bg-juwura-cream hover:text-juwura-brown transition-all duration-300"
             >
               Explore Collection
             </Link>
@@ -133,9 +133,9 @@ const Index = () => {
         </div>
 
         <div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce"
           style={{
-            opacity: Math.max(0, 1 - scrollY * 0.005),
+            opacity: Math.max(0, 1 - scrollY * 0.003),
           }}
         >
           <svg 
@@ -151,17 +151,17 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Story Section */}
-      <ParallaxSection bgColor="#FEF7E5" speed={0.3}>
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Story Section - improved spacing */}
+      <ParallaxSection bgColor="#FEF7E5" speed={0.3} spacing="xl">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="fade-in-element opacity-0">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Our Story</h2>
-            <p className="text-lg mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold mb-8">Our Story</h2>
+            <p className="text-lg mb-8">
               Jùwúrà is an authentic adire clothing brand founded by Oreoluwa Obabiyi-Nicol
               in Lagos, Nigeria. Our mission is to preserve the rich cultural heritage of adire 
               textile art while creating contemporary fashion that resonates with the modern world.
             </p>
-            <p className="text-lg mb-6">
+            <p className="text-lg mb-8">
               Every piece in our collection is meticulously crafted using traditional techniques 
               passed down through generations, ensuring the authenticity and quality that 
               adire is known for.
@@ -180,22 +180,23 @@ const Index = () => {
         </div>
       </ParallaxSection>
       
-      {/* Collection Preview */}
+      {/* Collection Preview - improved spacing */}
       <ParallaxSection 
         bgImage="https://images.unsplash.com/photo-1517928260182-5688aead3066?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
         speed={0.5}
+        spacing="large"
       >
-        <div className="text-center text-white mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 fade-in-element opacity-0">
+        <div className="text-center text-white mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-8 fade-in-element opacity-0">
             Featured Collection
           </h2>
-          <p className="text-xl max-w-3xl mx-auto mb-12 fade-in-element opacity-0">
+          <p className="text-xl max-w-3xl mx-auto mb-16 fade-in-element opacity-0">
             Discover our curated selection of handcrafted adire garments and accessories, 
             each telling a unique story of Nigerian artistry.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-4">
           {sampleProducts.map((product) => (
             <div key={product.id} className="fade-in-element opacity-0">
               <ProductCard {...product} />
@@ -203,19 +204,19 @@ const Index = () => {
           ))}
         </div>
         
-        <div className="text-center mt-12 fade-in-element opacity-0">
+        <div className="text-center mt-16 fade-in-element opacity-0">
           <Link
             to="/products"
-            className="bg-juwura-cream text-juwura-brown px-8 py-3 rounded-md inline-block text-lg font-medium hover:bg-white transition-colors"
+            className="bg-juwura-cream text-juwura-brown px-8 py-4 rounded-md inline-block text-lg font-medium hover:bg-white transition-colors"
           >
             View All Products
           </Link>
         </div>
       </ParallaxSection>
 
-      {/* Craftsmanship Section */}
-      <ParallaxSection bgColor="#FEF7E5" speed={0.2}>
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Craftsmanship Section - improved spacing */}
+      <ParallaxSection bgColor="#FEF7E5" speed={0.2} spacing="large">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1 fade-in-element opacity-0">
             <div className="relative">
               <img
@@ -228,13 +229,13 @@ const Index = () => {
           </div>
 
           <div className="order-1 md:order-2 fade-in-element opacity-0">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Artisanal Craftsmanship</h2>
-            <p className="text-lg mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold mb-8">Artisanal Craftsmanship</h2>
+            <p className="text-lg mb-8">
               Each Jùwúrà piece is a labor of love, crafted by skilled artisans who have 
               perfected their techniques over years of dedicated practice. We honor 
               the traditional methods of adire making while embracing innovation.
             </p>
-            <p className="text-lg mb-6">
+            <p className="text-lg mb-8">
               From carefully selected fabrics to the meticulous application of resist 
               patterns and natural indigo dyeing, our process preserves the soul of 
               adire while creating garments that are both timeless and contemporary.
@@ -249,17 +250,18 @@ const Index = () => {
         </div>
       </ParallaxSection>
 
-      {/* Call to Action */}
+      {/* Call to Action - improved spacing */}
       <ParallaxSection 
         bgImage="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
         speed={0.4}
         className="bg-gradient-to-r from-juwura-brown/80 to-juwura-indigo/80"
+        spacing="large"
       >
-        <div className="text-center text-white py-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 fade-in-element opacity-0">
+        <div className="text-center text-white py-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-8 fade-in-element opacity-0">
             Join the Jùwúrà Community
           </h2>
-          <p className="text-xl max-w-3xl mx-auto mb-12 fade-in-element opacity-0">
+          <p className="text-xl max-w-3xl mx-auto mb-16 fade-in-element opacity-0">
             Be the first to know about new collections, exclusive events, and special offers.
           </p>
           <div className="max-w-md mx-auto fade-in-element opacity-0">

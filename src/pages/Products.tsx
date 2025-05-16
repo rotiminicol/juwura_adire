@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ParallaxSection from "@/components/ParallaxSection";
@@ -136,14 +135,15 @@ const Products = () => {
   }, [filteredProducts]);
 
   return (
-    <div className="pt-16">
-      {/* Header */}
+    <div className="overflow-hidden">
+      {/* Header - adjusted for better spacing */}
       <ParallaxSection 
         bgImage="https://images.unsplash.com/photo-1613280197550-bca3d1f29454?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
         speed={0.3}
         className="min-h-[40vh] bg-juwura-brown/50"
+        spacing="large"
       >
-        <div className="text-center text-white">
+        <div className="text-center text-white max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Our Collection</h1>
           <p className="text-xl max-w-3xl mx-auto">
             Discover the perfect blend of tradition and contemporary style
@@ -151,12 +151,16 @@ const Products = () => {
         </div>
       </ParallaxSection>
 
-      {/* Products Section */}
-      <ParallaxSection bgColor="#FEF7E5" speed={0.1}>
+      {/* Products Section - improved spacing */}
+      <ParallaxSection 
+        bgColor="#FEF7E5" 
+        speed={0.1}
+        spacing="xl"
+      >
         {/* Category Tabs */}
-        <div className="mb-12 fade-in-element opacity-0">
+        <div className="mb-16 fade-in-element opacity-0">
           <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-transparent w-full flex flex-wrap justify-center gap-2 h-auto">
+            <TabsList className="bg-transparent w-full flex flex-wrap justify-center gap-4 h-auto mb-12">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category}
@@ -173,8 +177,8 @@ const Products = () => {
             </TabsList>
 
             {categories.map((category) => (
-              <TabsContent key={category} value={category} className="mt-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <TabsContent key={category} value={category} className="mt-12">
+                <div className="product-grid">
                   {filteredProducts.map((product) => (
                     <div key={product.id} className="fade-in-element opacity-0">
                       <ProductCard {...product} isNewArrival={product.isNewArrival} />
@@ -196,14 +200,15 @@ const Products = () => {
         </div>
       </ParallaxSection>
 
-      {/* Custom Orders */}
+      {/* Custom Orders - improved spacing */}
       <ParallaxSection 
         bgImage="https://images.unsplash.com/photo-1506806732259-39c2d0268443?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
         speed={0.4}
+        spacing="large"
       >
-        <div className="bg-juwura-brown/80 text-white p-8 md:p-16 rounded-lg max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 fade-in-element opacity-0">Custom Orders</h2>
-          <p className="text-xl mb-8 fade-in-element opacity-0">
+        <div className="bg-juwura-brown/80 text-white p-10 md:p-16 rounded-lg max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-8 fade-in-element opacity-0">Custom Orders</h2>
+          <p className="text-xl mb-10 fade-in-element opacity-0">
             Looking for something unique? We offer bespoke services to create 
             the perfect adire piece tailored specifically to your preferences.
           </p>
@@ -213,14 +218,18 @@ const Products = () => {
         </div>
       </ParallaxSection>
 
-      {/* Care Instructions */}
-      <ParallaxSection bgColor="#FEF7E5" speed={0.2}>
+      {/* Care Instructions - improved spacing */}
+      <ParallaxSection 
+        bgColor="#FEF7E5" 
+        speed={0.2}
+        spacing="xl"
+      >
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center fade-in-element opacity-0">
+          <h2 className="text-3xl font-bold mb-16 text-center fade-in-element opacity-0">
             Care Instructions
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center fade-in-element opacity-0">
               <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-juwura-brown" fill="none" viewBox="0 0 24 24" stroke="currentColor">

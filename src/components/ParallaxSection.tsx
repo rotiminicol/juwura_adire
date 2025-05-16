@@ -7,6 +7,7 @@ interface ParallaxSectionProps {
   bgColor?: string;
   speed?: number;
   className?: string;
+  spacing?: "normal" | "large" | "xl" | "none"; // Added spacing prop
 }
 
 const ParallaxSection = ({ 
@@ -14,7 +15,8 @@ const ParallaxSection = ({
   bgImage,
   bgColor = "transparent",
   speed = 0.5,
-  className = ""
+  className = "",
+  spacing = "normal" // Default spacing
 }: ParallaxSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -30,23 +32,34 @@ const ParallaxSection = ({
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
       
-      // Check if the section is in the viewport
+      // Check if the section is in the viewport with expanded range for smoother transitions
       if (
-        scrollTop + window.innerHeight >= sectionTop &&
-        scrollTop <= sectionTop + sectionHeight
+        scrollTop + window.innerHeight >= sectionTop - 200 &&
+        scrollTop <= sectionTop + sectionHeight + 200
       ) {
-        // Calculate the parallax effect
+        // Calculate the parallax effect but make it more subtle
         const distanceFromTop = scrollTop - sectionTop;
-        const parallaxOffset = distanceFromTop * speed;
+        const parallaxOffset = distanceFromTop * speed * 0.7; // Reduced for smoother effect
         
-        // Apply transform to the content
+        // Apply transform with easing
         content.style.transform = `translateY(${parallaxOffset}px)`;
+        content.style.transition = "transform 0.1s ease-out";
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [speed]);
+
+  // Determine padding based on spacing prop
+  const getPadding = () => {
+    switch(spacing) {
+      case "large": return "py-24 px-6 md:px-12";
+      case "xl": return "py-32 px-8 md:px-16";
+      case "none": return "";
+      default: return "py-16 px-4 md:px-8"; // normal spacing
+    }
+  };
 
   const backgroundStyle = bgImage 
     ? { backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' } 
@@ -55,7 +68,7 @@ const ParallaxSection = ({
   return (
     <section 
       ref={sectionRef} 
-      className={`parallax-section ${className}`}
+      className={`parallax-section ${getPadding()} ${className}`}
     >
       <div 
         className="parallax-bg w-full h-full absolute inset-0"
