@@ -1,16 +1,20 @@
 
 import { useState, useEffect } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ParallaxSection from "@/components/ParallaxSection";
 import ProductCard from "@/components/ProductCard";
 
+// Define product categories
 const categories = [
   "All",
   "Women's Wear",
   "Men's Wear",
   "Accessories",
-  "Home Décor"
+  "Home Décor",
+  "New Arrivals"
 ];
 
+// Product data with added isNewArrival property
 const products = [
   {
     id: 1,
@@ -18,7 +22,8 @@ const products = [
     price: 15000,
     image: "https://images.unsplash.com/photo-1603796846097-bee99e4a601f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     description: "Traditional hand-dyed top with authentic adire pattern.",
-    category: "Women's Wear"
+    category: "Women's Wear",
+    isNewArrival: true
   },
   {
     id: 2,
@@ -34,7 +39,8 @@ const products = [
     price: 8000,
     image: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     description: "Luxurious silk scarf with traditional indigo pattern.",
-    category: "Accessories"
+    category: "Accessories",
+    isNewArrival: true
   },
   {
     id: 4,
@@ -42,7 +48,8 @@ const products = [
     price: 18000,
     image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     description: "Contemporary shirt with subtle adire detailing.",
-    category: "Men's Wear"
+    category: "Men's Wear",
+    isNewArrival: true
   },
   {
     id: 5,
@@ -87,17 +94,20 @@ const products = [
 ];
 
 const Products = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [activeTab, setActiveTab] = useState("All");
   const [filteredProducts, setFilteredProducts] = useState(products);
   
   useEffect(() => {
-    if (selectedCategory === "All") {
+    if (activeTab === "All") {
       setFilteredProducts(products);
+    } else if (activeTab === "New Arrivals") {
+      const newArrivals = products.filter(product => product.isNewArrival);
+      setFilteredProducts(newArrivals);
     } else {
-      const filtered = products.filter(product => product.category === selectedCategory);
+      const filtered = products.filter(product => product.category === activeTab);
       setFilteredProducts(filtered);
     }
-  }, [selectedCategory]);
+  }, [activeTab]);
 
   // Elements entering viewport animation
   useEffect(() => {
@@ -143,42 +153,47 @@ const Products = () => {
 
       {/* Products Section */}
       <ParallaxSection bgColor="#FEF7E5" speed={0.1}>
-        {/* Category Filters */}
+        {/* Category Tabs */}
         <div className="mb-12 fade-in-element opacity-0">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full transition-all ${
-                  selectedCategory === category
-                    ? "bg-juwura-brown text-white"
-                    : "bg-white text-juwura-brown hover:bg-juwura-brown/10"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
+          <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="bg-transparent w-full flex flex-wrap justify-center gap-2 h-auto">
+              {categories.map((category) => (
+                <TabsTrigger
+                  key={category}
+                  value={category}
+                  className={`px-6 py-2 rounded-full transition-all ${
+                    activeTab === category
+                      ? "bg-juwura-brown text-white data-[state=active]:bg-juwura-brown data-[state=active]:text-white"
+                      : "bg-white text-juwura-brown hover:bg-juwura-brown/10 data-[state=active]:bg-white"
+                  }`}
+                >
+                  {category}
+                </TabsTrigger>
+              ))}
+            </TabsList>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="fade-in-element opacity-0">
-              <ProductCard {...product} />
-            </div>
-          ))}
+            {categories.map((category) => (
+              <TabsContent key={category} value={category} className="mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredProducts.map((product) => (
+                    <div key={product.id} className="fade-in-element opacity-0">
+                      <ProductCard {...product} isNewArrival={product.isNewArrival} />
+                    </div>
+                  ))}
+                </div>
+                
+                {filteredProducts.length === 0 && (
+                  <div className="text-center py-16 fade-in-element opacity-0">
+                    <h3 className="text-2xl font-medium">No products found in this category</h3>
+                    <p className="mt-4 text-lg text-gray-600">
+                      Please check back later or explore other categories.
+                    </p>
+                  </div>
+                )}
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
-        
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-16 fade-in-element opacity-0">
-            <h3 className="text-2xl font-medium">No products found in this category</h3>
-            <p className="mt-4 text-lg text-gray-600">
-              Please check back later or explore other categories.
-            </p>
-          </div>
-        )}
       </ParallaxSection>
 
       {/* Custom Orders */}
