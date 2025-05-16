@@ -17,7 +17,7 @@ const ProductCard = ({ id, name, price, image, description, isNewArrival = false
   
   return (
     <div 
-      className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-500 hover:shadow-xl border border-gray-100 h-full"
+      className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-500 hover:shadow-xl border border-gray-100 h-full w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -33,18 +33,18 @@ const ProductCard = ({ id, name, price, image, description, isNewArrival = false
           </div>
         )}
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-medium mb-3 font-playfair">{name}</h3>
-        {description && <p className="text-gray-600 mb-4 text-sm">{description}</p>}
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-juwura-indigo font-medium">₦{price.toLocaleString()}</span>
-          <div className="flex space-x-3">
-            <button className="bg-juwura-brown text-white p-2 rounded-md hover:bg-juwura-brown/80 transition-colors">
-              <ShoppingBag className="h-5 w-5" />
+      <div className="p-4 md:p-6">
+        <h3 className="text-lg md:text-xl font-medium mb-2 md:mb-3 font-playfair">{name}</h3>
+        {description && <p className="text-gray-600 mb-3 text-xs md:text-sm">{description}</p>}
+        <div className="flex flex-wrap justify-between items-center gap-2 mt-4">
+          <span className="text-juwura-indigo font-medium text-sm md:text-base">₦{price.toLocaleString()}</span>
+          <div className="flex space-x-2 md:space-x-3">
+            <button className="bg-juwura-brown text-white p-1.5 md:p-2 rounded-md hover:bg-juwura-brown/80 transition-colors">
+              <ShoppingBag className="h-4 w-4 md:h-5 md:w-5" />
             </button>
             <Link 
               to={`/products/${id}`}
-              className="bg-juwura-indigo text-white px-4 py-2 rounded-md text-sm hover:bg-opacity-80 transition-colors"
+              className="bg-juwura-indigo text-white px-3 py-1.5 md:px-4 md:py-2 rounded-md text-xs md:text-sm hover:bg-opacity-80 transition-colors"
             >
               View Details
             </Link>

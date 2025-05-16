@@ -7,7 +7,7 @@ interface ParallaxSectionProps {
   bgColor?: string;
   speed?: number;
   className?: string;
-  spacing?: "normal" | "large" | "xl" | "none"; // Added spacing prop
+  spacing?: "normal" | "large" | "xl" | "none"; 
 }
 
 const ParallaxSection = ({ 
@@ -16,7 +16,7 @@ const ParallaxSection = ({
   bgColor = "transparent",
   speed = 0.5,
   className = "",
-  spacing = "normal" // Default spacing
+  spacing = "normal"
 }: ParallaxSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -26,6 +26,11 @@ const ParallaxSection = ({
     const content = contentRef.current;
 
     if (!section || !content) return;
+
+    // Check if we're on a mobile device (simplified check)
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    // Reduce parallax effect on mobile or disable it completely
+    const mobileSpeedFactor = isMobile ? 0.25 : 1;
 
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -37,9 +42,9 @@ const ParallaxSection = ({
         scrollTop + window.innerHeight >= sectionTop - 200 &&
         scrollTop <= sectionTop + sectionHeight + 200
       ) {
-        // Calculate the parallax effect but make it more subtle
+        // Calculate the parallax effect but make it more subtle on mobile
         const distanceFromTop = scrollTop - sectionTop;
-        const parallaxOffset = distanceFromTop * speed * 0.7; // Reduced for smoother effect
+        const parallaxOffset = distanceFromTop * speed * 0.5 * mobileSpeedFactor;
         
         // Apply transform with easing
         content.style.transform = `translateY(${parallaxOffset}px)`;
@@ -47,6 +52,7 @@ const ParallaxSection = ({
       }
     };
 
+    // Only apply parallax effect if not on a mobile device or use reduced effect
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [speed]);
@@ -54,10 +60,10 @@ const ParallaxSection = ({
   // Determine padding based on spacing prop
   const getPadding = () => {
     switch(spacing) {
-      case "large": return "py-24 px-6 md:px-12";
-      case "xl": return "py-32 px-8 md:px-16";
+      case "large": return "py-16 md:py-24 px-4 md:px-12";
+      case "xl": return "py-20 md:py-32 px-4 md:px-16";
       case "none": return "";
-      default: return "py-16 px-4 md:px-8"; // normal spacing
+      default: return "py-12 md:py-16 px-4 md:px-8"; // normal spacing
     }
   };
 
@@ -74,7 +80,7 @@ const ParallaxSection = ({
         className="parallax-bg w-full h-full absolute inset-0"
         style={backgroundStyle}
       />
-      <div ref={contentRef} className="parallax-content relative z-10">
+      <div ref={contentRef} className="parallax-content relative z-10 w-full">
         {children}
       </div>
     </section>
