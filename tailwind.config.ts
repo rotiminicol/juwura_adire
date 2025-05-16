@@ -64,12 +64,20 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				juwura: {
-					brown: '#78350F',
-					cream: '#FEF7E5',
+					brown: '#4A3520',
+					cream: '#F5F0E6',
 					indigo: '#1A365D',
 					terracotta: '#C05621',
-					gold: '#D69E2E'
+					gold: '#D69E2E',
+					slate: '#3D4451',
+					navy: '#172B4D',
+					beige: '#E8DFD0',
+					rust: '#A84632'
 				}
+			},
+			fontFamily: {
+				'playfair': ['Playfair Display', 'serif'],
+				'poppins': ['Poppins', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

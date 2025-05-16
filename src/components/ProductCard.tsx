@@ -11,7 +11,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ id, name, price, image, description }: ProductCardProps) => {
   return (
-    <div className="product-card bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
+    <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl border border-gray-100">
       <div className="overflow-hidden h-64 relative">
         <img 
           src={image} 
@@ -19,14 +19,14 @@ const ProductCard = ({ id, name, price, image, description }: ProductCardProps) 
           className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" 
         />
       </div>
-      <div className="p-4">
-        <h3 className="text-lg font-medium mb-2">{name}</h3>
-        {description && <p className="text-sm text-gray-600 mb-3">{description}</p>}
+      <div className="p-5">
+        <h3 className="text-xl font-medium mb-2 font-playfair">{name}</h3>
+        {description && <p className="text-gray-600 mb-3 text-sm">{description}</p>}
         <div className="flex justify-between items-center">
-          <span className="text-juwura-brown font-medium">₦{price.toLocaleString()}</span>
+          <span className="text-juwura-indigo font-medium">₦{price.toLocaleString()}</span>
           <Link 
             to={`/products/${id}`}
-            className="bg-juwura-brown text-white px-4 py-2 rounded text-sm hover:bg-opacity-80 transition-colors"
+            className="bg-juwura-indigo text-white px-4 py-2 rounded text-sm hover:bg-opacity-80 transition-colors"
           >
             View Details
           </Link>
