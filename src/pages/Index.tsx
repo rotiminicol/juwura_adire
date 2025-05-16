@@ -69,7 +69,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="min-h-screen">
       {/* Hero Section - enhanced with cultural elements */}
       <div 
         ref={heroRef}
