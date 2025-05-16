@@ -112,9 +112,9 @@ const products = [
     name: "Adire 6",
     price: 22000,
     images: [
-      "/images/adire6.png",
-      "/images/adire6.png",
-      "/images/adire6.png"
+      "/adire6.png",
+      "/adire6.png",
+      "/adire6.png"
     ],
     description: "Flowing maxi skirt with bold adire pattern. This elegant skirt combines traditional adire patterning with a contemporary silhouette. The breathable cotton fabric ensures comfort in warm weather while the unique pattern tells the story of Nigerian textile heritage.",
     details: [
@@ -150,9 +150,9 @@ const products = [
     name: "Adire 8",
     price: 12000,
     images: [
-      "/images/adire8.png",
-      "/images/adire8.png",
-      "/images/adire8.png"
+      "/adire8.png",
+      "/adire8.png",
+      "/adire8.png"
     ],
     description: "Elegant table runner for dining or display. This hand-dyed table runner features a classic adire pattern created using the tie-dye technique. The natural indigo dye gives the runner a rich, deep blue color that adds a touch of elegance to any dining table.",
     details: [
@@ -169,9 +169,9 @@ const products = [
     name: "Adire 9",
     price: 14000,
     images: [
-      "/images/adire9.png",
-      "/images/adire9.png",
-      "/images/adire9.png"
+      "/adire9.png",
+      "/adire9.png",
+      "/adire9.png"
     ],
     description: "Stylish clutch with traditional adire pattern. This hand-dyed clutch bag features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
     details: [
@@ -188,9 +188,9 @@ const products = [
     name: "Adire 10",
     price: 15000,
     images: [
-      "/images/adire10.png",
-      "/images/adire10.png",
-      "/images/adire10.png"
+      "/adire10.png",
+      "/adire10.png",
+      "/adire10.png"
     ],
     description: "Beautiful adire piece with intricate patterns. This hand-dyed piece features a unique adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
     details: [
@@ -207,9 +207,9 @@ const products = [
     name: "Adire 11",
     price: 20000,
     images: [
-      "/images/adire11.png",
-      "/images/adire11.png",
-      "/images/adire11.png"
+      "/adire11.png",
+      "/adire11.png",
+      "/adire11.png"
     ],
     description: "Hand-dyed masterpiece with geometric patterns. This unique piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
     details: [
@@ -226,9 +226,9 @@ const products = [
     name: "Adire 12",
     price: 18000,
     images: [
-      "/images/adire12.png",
-      "/images/adire12.png",
-      "/images/adire12.png"
+      "/adire12.png",
+      "/adire12.png",
+      "/adire12.png"
     ],
     description: "Modern take on traditional adire design. This contemporary piece combines traditional adire patterning with a modern silhouette. The breathable cotton fabric ensures comfort in warm weather while the unique pattern tells the story of Nigerian textile heritage.",
     details: [
@@ -245,9 +245,9 @@ const products = [
     name: "Adire 13",
     price: 16000,
     images: [
-      "/images/adire13.png",
-      "/images/adire13.png",
-      "/images/adire13.png"
+      "/adire13.png",
+      "/adire13.png",
+      "/adire13.png"
     ],
     description: "Classic adire pattern with contemporary twist. This hand-dyed piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
     details: [
@@ -264,9 +264,9 @@ const products = [
     name: "Adire 14",
     price: 19000,
     images: [
-      "/images/adire14.png",
-      "/images/adire14.png",
-      "/images/adire14.png"
+      "/adire14.png",
+      "/adire14.png",
+      "/adire14.png"
     ],
     description: "Elegant adire piece for special occasions. This hand-dyed piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
     details: [
@@ -283,9 +283,9 @@ const products = [
     name: "Adire 15",
     price: 17000,
     images: [
-      "/images/adire15.png",
-      "/images/adire15.png",
-      "/images/adire15.png"
+      "/adire15.png",
+      "/adire15.png",
+      "/adire15.png"
     ],
     description: "Hand-dyed adire with modern elements. This unique piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
     details: [
@@ -302,9 +302,9 @@ const products = [
     name: "Adire 16",
     price: 22000,
     images: [
-      "/images/adire16.png",
-      "/images/adire16.png",
-      "/images/adire16.png"
+      "/adire16.png",
+      "/adire16.png",
+      "/adire16.png"
     ],
     description: "Luxury adire piece with premium materials. This hand-dyed piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
     details: [
