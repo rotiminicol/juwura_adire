@@ -1,10 +1,13 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "@/contexts/CartContext";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart } from "lucide-react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { cartItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +39,7 @@ const Navbar = () => {
   return (
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-juwura-cream/90 shadow-md backdrop-blur-md py-2" : "bg-transparent py-4"
+        isScrolled ? "bg-juwura-cream/95 shadow-lg backdrop-blur-xl py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -50,17 +53,25 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
-          <Link to="/" className="font-medium hover:text-juwura-terracotta transition-colors">
+          <Link to="/" className="font-medium text-lg tracking-wide hover:text-juwura-terracotta transition-all duration-300 transform hover:translate-y-0.5 hover:scale-105">
             Home
           </Link>
-          <Link to="/about" className="font-medium hover:text-juwura-terracotta transition-colors">
+          <Link to="/about" className="font-medium text-lg tracking-wide hover:text-juwura-terracotta transition-all duration-300 transform hover:translate-y-0.5 hover:scale-105">
             About
           </Link>
-          <Link to="/products" className="font-medium hover:text-juwura-terracotta transition-colors">
+          <Link to="/products" className="font-medium text-lg tracking-wide hover:text-juwura-terracotta transition-all duration-300 transform hover:translate-y-0.5 hover:scale-105">
             Products
           </Link>
-          <Link to="/contact" className="font-medium hover:text-juwura-terracotta transition-colors">
+          <Link to="/contact" className="font-medium text-lg tracking-wide hover:text-juwura-terracotta transition-all duration-300 transform hover:translate-y-0.5 hover:scale-105">
             Contact
+          </Link>
+          {cartItems.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-juwura-terracotta text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+              {cartItems.length}
+            </span>
+          )}
+          <Link to="/cart" className="group relative">
+            <ShoppingCart className="w-6 h-6 transition-transform group-hover:scale-110" />
           </Link>
         </nav>
 

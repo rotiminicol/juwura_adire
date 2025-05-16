@@ -17,78 +17,150 @@ const categories = [
 const products = [
   {
     id: 1,
-    name: "Adire Eleko Top",
+    name: "Adire 1",
     price: 15000,
-    image: "https://images.unsplash.com/photo-1603796846097-bee99e4a601f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire1.png",
     description: "Traditional hand-dyed top with authentic adire pattern.",
     category: "Women's Wear",
     isNewArrival: true
   },
   {
     id: 2,
-    name: "Kampala Shift Dress",
+    name: "Adire 2",
     price: 25000,
-    image: "https://images.unsplash.com/photo-1503160865267-3e277ffb3ff0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire2.png",
     description: "Modern shift dress with classic adire design.",
     category: "Women's Wear"
   },
   {
     id: 3,
-    name: "Adire Silk Scarf",
+    name: "Adire 3",
     price: 8000,
-    image: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire3.png",
     description: "Luxurious silk scarf with traditional indigo pattern.",
     category: "Accessories",
     isNewArrival: true
   },
   {
     id: 4,
-    name: "Men's Adire Shirt",
+    name: "Adire 4",
     price: 18000,
-    image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire4.png",
     description: "Contemporary shirt with subtle adire detailing.",
     category: "Men's Wear",
     isNewArrival: true
   },
   {
     id: 5,
-    name: "Indigo Throw Pillow",
+    name: "Adire 5",
     price: 6000,
-    image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire5.png",
     description: "Hand-dyed pillow cover with traditional pattern.",
     category: "Home Décor"
   },
   {
     id: 6,
-    name: "Adire Maxi Skirt",
+    name: "Adire 6",
     price: 22000,
-    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire6.png",
     description: "Flowing maxi skirt with bold adire pattern.",
     category: "Women's Wear"
   },
   {
     id: 7,
-    name: "Adire Bow Tie",
+    name: "Adire 7",
     price: 5000,
-    image: "https://images.unsplash.com/photo-1575444075430-90d0e0b2d98e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire7.png",
     description: "Unique bow tie with intricate adire pattern.",
     category: "Men's Wear"
   },
   {
     id: 8,
-    name: "Indigo Table Runner",
+    name: "Adire 8",
     price: 12000,
-    image: "https://images.unsplash.com/photo-1579439335848-76d14719d1ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire8.png",
     description: "Elegant table runner for dining or display.",
     category: "Home Décor"
   },
   {
     id: 9,
-    name: "Adire Clutch Bag",
+    name: "Adire 9",
     price: 14000,
-    image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire9.png",
     description: "Stylish clutch with traditional adire pattern.",
     category: "Accessories"
+  },
+  {
+    id: 10,
+    name: "Adire 10",
+    price: 15000,
+    image: "/adire10.png",
+    description: "Beautiful adire piece with intricate patterns.",
+    category: "Women's Wear"
+  },
+  {
+    id: 11,
+    name: "Adire 11",
+    price: 20000,
+    image: "/adire11.png",
+    description: "Hand-dyed masterpiece with geometric patterns.",
+    category: "Men's Wear"
+  },
+  {
+    id: 12,
+    name: "Adire 12",
+    price: 18000,
+    image: "/adire12.png",
+    description: "Modern take on traditional adire design.",
+    category: "Women's Wear"
+  },
+  {
+    id: 13,
+    name: "Adire 13",
+    price: 16000,
+    image: "/adire13.png",
+    description: "Classic adire pattern with contemporary twist.",
+    category: "Accessories"
+  },
+  {
+    id: 14,
+    name: "Adire 14",
+    price: 19000,
+    image: "/adire14.png",
+    description: "Elegant adire piece for special occasions.",
+    category: "Women's Wear"
+  },
+  {
+    id: 15,
+    name: "Adire 15",
+    price: 17000,
+    image: "/adire15.png",
+    description: "Hand-dyed adire with modern elements.",
+    category: "Men's Wear"
+  },
+  {
+    id: 16,
+    name: "Adire 16",
+    price: 22000,
+    image: "/adire16.png",
+    description: "Luxury adire piece with premium materials.",
+    category: "Women's Wear"
+  },
+  {
+    id: 17,
+    name: "Adire 17",
+    price: 18000,
+    image: "/adire17.png",
+    description: "Hand-dyed adire piece with geometric patterns.",
+    category: "Women's Wear"
+  },
+  {
+    id: 18,
+    name: "Adire 18",
+    price: 25000,
+    image: "/adire18.png",
+    description: "Elegant adire dress with contemporary design.",
+    category: "Women's Wear"
   }
 ];
 

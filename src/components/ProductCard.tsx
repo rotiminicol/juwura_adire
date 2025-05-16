@@ -21,11 +21,11 @@ const ProductCard = ({ id, name, price, image, description, isNewArrival = false
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="overflow-hidden h-64 relative">
+      <div className="overflow-hidden h-80 relative">
         <img 
           src={image} 
           alt={name} 
-          className={`w-full h-full object-cover transition-transform duration-1000 ${isHovered ? 'scale-105' : ''}`} 
+          className={`w-full h-full object-contain transition-transform duration-1000 ${isHovered ? 'scale-105' : ''}`} 
         />
         {isNewArrival && (
           <div className="absolute top-0 left-0 bg-juwura-gold text-juwura-brown px-3 py-1 m-4 rounded-md font-medium text-sm">

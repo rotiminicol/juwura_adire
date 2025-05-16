@@ -1,5 +1,10 @@
 
 import { useEffect, useState } from "react";
+import { useCart } from "@/contexts/CartContext";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
 import { useParams, Link } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
 import { Button } from "@/components/ui/button";
@@ -9,12 +14,12 @@ import { useToast } from "@/components/ui/use-toast";
 const products = [
   {
     id: "1",
-    name: "Adire Eleko Top",
+    name: "Adire 1",
     price: 15000,
     images: [
-      "https://images.unsplash.com/photo-1603796846097-bee99e4a601f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1603796846097-bee99e4a601f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1603796846097-bee99e4a601f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      "/adire1.png",
+      "/adire1.png",
+      "/adire1.png"
     ],
     description: "Traditional hand-dyed top with authentic adire pattern. This versatile piece features a unique pattern created using the adire eleko technique, where cassava starch is applied by hand to create resist patterns before dyeing. The result is a one-of-a-kind garment that celebrates Nigerian heritage while offering contemporary style.",
     details: [
@@ -28,12 +33,12 @@ const products = [
   },
   {
     id: "2",
-    name: "Kampala Shift Dress",
+    name: "Adire 2",
     price: 25000,
     images: [
-      "https://images.unsplash.com/photo-1503160865267-3e277ffb3ff0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1503160865267-3e277ffb3ff0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1503160865267-3e277ffb3ff0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      "/adire2.png",
+      "/adire2.png",
+      "/adire2.png"
     ],
     description: "Modern shift dress with classic adire design. This elegant dress combines traditional adire patterning with a contemporary silhouette, perfect for both casual and semi-formal occasions. The breathable cotton fabric ensures comfort in warm weather while the unique pattern tells the story of Nigerian textile heritage.",
     details: [
@@ -47,22 +52,307 @@ const products = [
   },
   {
     id: "3",
-    name: "Adire Silk Scarf",
+    name: "Adire 3",
     price: 8000,
     images: [
-      "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      "/adire3.png",
+      "/adire3.png",
+      "/adire3.png"
     ],
-    description: "Luxurious silk scarf with traditional indigo pattern. This versatile accessory can be worn in numerous ways - as a headwrap, neck scarf, or even as a bag accessory. The premium silk material gives a luxurious sheen to the traditional adire patterns, creating a beautiful blend of heritage and luxury.",
+    description: "Luxurious silk scarf with traditional indigo pattern. This hand-dyed scarf features a classic adire pattern created using the tie-dye technique. The soft silk fabric drapes beautifully and the natural indigo dye ensures the colors remain vibrant over time.",
     details: [
       "100% Silk",
       "Natural indigo dye",
-      "Dry clean only",
+      "Hand wash cold",
       "Made in Nigeria",
-      "Size: 90cm x 90cm"
+      "Dimensions: 150cm x 30cm"
     ],
     category: "Accessories"
+  },
+  {
+    id: "4",
+    name: "Adire 4",
+    price: 18000,
+    images: [
+      "/adire4.png",
+      "/adire4.png",
+      "/adire4.png"
+    ],
+    description: "Contemporary shirt with subtle adire detailing. This modern shirt features a unique adire pattern that adds a touch of Nigerian heritage to your wardrobe. The pattern is created using the tie-dye technique, ensuring each shirt is one-of-a-kind.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Machine wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Men's Wear"
+  },
+  {
+    id: "5",
+    name: "Adire 5",
+    price: 6000,
+    images: [
+      "/adire5.png",
+      "/adire5.png",
+      "/adire5.png"
+    ],
+    description: "Hand-dyed pillow cover with traditional pattern. This throw pillow features a classic adire pattern created using the tie-dye technique. The natural indigo dye gives the pillow a rich, deep blue color that adds a touch of elegance to any room.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Machine wash cold",
+      "Made in Nigeria",
+      "Dimensions: 45cm x 45cm"
+    ],
+    category: "Home Décor"
+  },
+  {
+    id: "6",
+    name: "Adire 6",
+    price: 22000,
+    images: [
+      "/images/adire6.png",
+      "/images/adire6.png",
+      "/images/adire6.png"
+    ],
+    description: "Flowing maxi skirt with bold adire pattern. This elegant skirt combines traditional adire patterning with a contemporary silhouette. The breathable cotton fabric ensures comfort in warm weather while the unique pattern tells the story of Nigerian textile heritage.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Women's Wear"
+  },
+  {
+    id: "7",
+    name: "Adire 7",
+    price: 5000,
+    images: [
+      "/adire7.png",
+      "/adire7.png",
+      "/adire7.png"
+    ],
+    description: "Unique bow tie with intricate adire pattern. This hand-dyed bow tie features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
+    details: [
+      "100% Silk",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Dimensions: 15cm x 7cm"
+    ],
+    category: "Men's Wear"
+  },
+  {
+    id: "8",
+    name: "Adire 8",
+    price: 12000,
+    images: [
+      "/images/adire8.png",
+      "/images/adire8.png",
+      "/images/adire8.png"
+    ],
+    description: "Elegant table runner for dining or display. This hand-dyed table runner features a classic adire pattern created using the tie-dye technique. The natural indigo dye gives the runner a rich, deep blue color that adds a touch of elegance to any dining table.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Machine wash cold",
+      "Made in Nigeria",
+      "Dimensions: 150cm x 40cm"
+    ],
+    category: "Home Décor"
+  },
+  {
+    id: "9",
+    name: "Adire 9",
+    price: 14000,
+    images: [
+      "/images/adire9.png",
+      "/images/adire9.png",
+      "/images/adire9.png"
+    ],
+    description: "Stylish clutch with traditional adire pattern. This hand-dyed clutch bag features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Dimensions: 25cm x 15cm"
+    ],
+    category: "Accessories"
+  },
+  {
+    id: "10",
+    name: "Adire 10",
+    price: 15000,
+    images: [
+      "/images/adire10.png",
+      "/images/adire10.png",
+      "/images/adire10.png"
+    ],
+    description: "Beautiful adire piece with intricate patterns. This hand-dyed piece features a unique adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Women's Wear"
+  },
+  {
+    id: "11",
+    name: "Adire 11",
+    price: 20000,
+    images: [
+      "/images/adire11.png",
+      "/images/adire11.png",
+      "/images/adire11.png"
+    ],
+    description: "Hand-dyed masterpiece with geometric patterns. This unique piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Men's Wear"
+  },
+  {
+    id: "12",
+    name: "Adire 12",
+    price: 18000,
+    images: [
+      "/images/adire12.png",
+      "/images/adire12.png",
+      "/images/adire12.png"
+    ],
+    description: "Modern take on traditional adire design. This contemporary piece combines traditional adire patterning with a modern silhouette. The breathable cotton fabric ensures comfort in warm weather while the unique pattern tells the story of Nigerian textile heritage.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Women's Wear"
+  },
+  {
+    id: "13",
+    name: "Adire 13",
+    price: 16000,
+    images: [
+      "/images/adire13.png",
+      "/images/adire13.png",
+      "/images/adire13.png"
+    ],
+    description: "Classic adire pattern with contemporary twist. This hand-dyed piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Accessories"
+  },
+  {
+    id: "14",
+    name: "Adire 14",
+    price: 19000,
+    images: [
+      "/images/adire14.png",
+      "/images/adire14.png",
+      "/images/adire14.png"
+    ],
+    description: "Elegant adire piece for special occasions. This hand-dyed piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Women's Wear"
+  },
+  {
+    id: "15",
+    name: "Adire 15",
+    price: 17000,
+    images: [
+      "/images/adire15.png",
+      "/images/adire15.png",
+      "/images/adire15.png"
+    ],
+    description: "Hand-dyed adire with modern elements. This unique piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Men's Wear"
+  },
+  {
+    id: "16",
+    name: "Adire 16",
+    price: 22000,
+    images: [
+      "/images/adire16.png",
+      "/images/adire16.png",
+      "/images/adire16.png"
+    ],
+    description: "Luxury adire piece with premium materials. This hand-dyed piece features a classic adire pattern created using the tie-dye technique. The natural indigo dye ensures the colors remain vibrant over time.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Women's Wear"
+  },
+  {
+    id: "17",
+    name: "Adire 17",
+    price: 18000,
+    images: [
+      "/adire17.png",
+      "/adire17.png",
+      "/adire17.png"
+    ],
+    description: "Hand-dyed adire piece with geometric patterns. This unique piece features a modern take on traditional adire patterns, combining geometric shapes with natural indigo dye. The cotton fabric ensures comfort while showcasing the craftsmanship of Nigerian artisans.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Women's Wear"
+  },
+  {
+    id: "18",
+    name: "Adire 18",
+    price: 25000,
+    images: [
+      "/adire18.png",
+      "/adire18.png",
+      "/adire18.png"
+    ],
+    description: "Elegant adire dress with contemporary design. This stunning dress combines traditional adire patterning with modern fashion sensibilities. The flowing silhouette and vibrant indigo dye make it perfect for special occasions.",
+    details: [
+      "100% Cotton",
+      "Natural indigo dye",
+      "Hand wash cold",
+      "Made in Nigeria",
+      "Available in sizes S-XL"
+    ],
+    category: "Women's Wear"
   }
 ];
 
@@ -72,7 +362,7 @@ const relatedProducts = [
     id: 4,
     name: "Men's Adire Shirt",
     price: 18000,
-    image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire4.png",
     description: "Contemporary shirt with subtle adire detailing.",
     category: "Men's Wear"
   },
@@ -80,7 +370,7 @@ const relatedProducts = [
     id: 5,
     name: "Indigo Throw Pillow",
     price: 6000,
-    image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire5.png",
     description: "Hand-dyed pillow cover with traditional pattern.",
     category: "Home Décor"
   },
@@ -88,7 +378,7 @@ const relatedProducts = [
     id: 6,
     name: "Adire Maxi Skirt",
     price: 22000,
-    image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire6.png",
     description: "Flowing maxi skirt with bold adire pattern.",
     category: "Women's Wear"
   }
@@ -99,7 +389,15 @@ const ProductDetail = () => {
   const [product, setProduct] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { addToCart } = useCart();
   const { toast } = useToast();
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
 
   useEffect(() => {
     // Find the product that matches the ID
@@ -115,16 +413,18 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (!product) return;
     
+    addToCart(
+      product.id,
+      product.name,
+      product.price,
+      product.images[0],
+      quantity
+    );
+    
     toast({
       title: "Item Added to Cart",
       description: `${quantity} x ${product.name} has been added to your cart.`,
       variant: "default",
-    });
-    
-    console.log("Added to cart:", { 
-      product: product.name, 
-      quantity, 
-      price: product.price 
     });
   };
   
@@ -294,12 +594,121 @@ const ProductDetail = () => {
               >
                 Add to Cart
               </Button>
-              <Button 
-                variant="outline"
-                className="border-juwura-brown text-juwura-brown hover:bg-juwura-brown hover:text-white py-6 flex-grow"
-              >
-                Buy Now
-              </Button>
+              <Dialog open={isCheckoutOpen} onOpenChange={setIsCheckoutOpen}>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="outline"
+                    className="border-juwura-brown text-juwura-brown hover:bg-juwura-brown hover:text-white py-6 flex-grow"
+                  >
+                    Buy Now
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Checkout</DialogTitle>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="name" className="text-right">
+                        Full Name
+                      </Label>
+                      <Input
+                        id="name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="email" className="text-right">
+                        Email
+                      </Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="phone" className="text-right">
+                        Phone Number
+                      </Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="address" className="text-right">
+                        Delivery Address
+                      </Label>
+                      <Input
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                      />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="quantity" className="text-right">
+                        Quantity
+                      </Label>
+                      <div className="flex items-center">
+                        <button
+                          type="button"
+                          className="bg-gray-200 px-3 py-2 rounded-l-md"
+                          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        >
+                          -
+                        </button>
+                        <input
+                          type="number"
+                          id="quantity"
+                          name="quantity"
+                          value={quantity}
+                          onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                          min="1"
+                          className="w-16 px-3 py-2 text-center border-y border-gray-200"
+                        />
+                        <button
+                          type="button"
+                          className="bg-gray-200 px-3 py-2 rounded-r-md"
+                          onClick={() => setQuantity(quantity + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label className="text-right">
+                        Total Amount
+                      </Label>
+                      <p className="text-juwura-terracotta font-medium">
+                        ₦{(product?.price * quantity).toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-end gap-2">
+                    <Button variant="outline" onClick={() => setIsCheckoutOpen(false)}>
+                      Cancel
+                    </Button>
+                    <Button 
+                      onClick={() => {
+                        // Here you would typically make an API call to process the order
+                        toast({
+                          title: "Order Placed Successfully",
+                          description: `Your order for ${quantity} x ${product?.name} has been placed. We will contact you shortly for confirmation.`,
+                          variant: "default",
+                        });
+                        setIsCheckoutOpen(false);
+                      }}
+                    >
+                      Place Order
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>

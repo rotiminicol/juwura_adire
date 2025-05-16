@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
-import RotatingCube from "@/components/RotatingCube";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 
@@ -11,21 +10,21 @@ const sampleProducts = [
     id: 1,
     name: "Adire Eleko Top",
     price: 15000,
-    image: "https://images.unsplash.com/photo-1603796846097-bee99e4a601f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire1.png",
     description: "Traditional hand-dyed top with authentic adire pattern."
   },
   {
     id: 2,
     name: "Kampala Shift Dress",
     price: 25000,
-    image: "https://images.unsplash.com/photo-1503160865267-3e277ffb3ff0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire3.png",
     description: "Modern shift dress with classic adire design."
   },
   {
     id: 3,
     name: "Adire Silk Scarf",
     price: 8000,
-    image: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/adire4.png",
     description: "Luxurious silk scarf with traditional indigo pattern."
   }
 ];
@@ -71,83 +70,119 @@ const Index = () => {
 
   return (
     <div className="overflow-x-hidden">
-      {/* Hero Section - enhanced spacing */}
+      {/* Hero Section - enhanced with cultural elements */}
       <div 
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-juwura-cream"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
         style={{ 
-          backgroundImage: "url(https://images.unsplash.com/photo-1633934542430-0a33652c58c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80)",
+          backgroundImage: "url('https://images.unsplash.com/photo-1574272106748-009d64305b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')",
           backgroundSize: "cover", 
-          backgroundPosition: "center"
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          transform: "translateZ(0)",
+          willChange: "transform"
         }}
       >
-        <div 
+        {/* Pattern Overlay */}
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-lg" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574272106748-009d64305b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')] opacity-20 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
+      <div 
           className="absolute inset-0 bg-juwura-brown/40"
           style={{
             transform: `translateY(${scrollY * 0.3}px)`,
           }}
         />
         
-        <div className="container mx-auto px-4 relative z-10 text-center text-white py-16">
+        <div className="container mx-auto px-4 relative z-10 text-center text-white py-16 max-w-4xl">
           <div className="mb-12">
             <img 
               src="/lovable-uploads/d669e35d-f019-43a0-a333-cf7ef26df738.png" 
               alt="Jùwúrà Logo" 
-              className="h-32 md:h-40 mx-auto mb-12 invert"
+              className="h-12 md:h-16 lg:h-24 mx-auto mb-12"
               style={{
-                transform: `translateY(${scrollY * -0.15}px) scale(${1 - scrollY * 0.0003})`,
+                transform: `translateY(${scrollY * -0.2}px) scale(${1 - scrollY * 0.0005})`,
+                transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)"
               }}
             />
           </div>
           
-          <h1 
-            className="text-5xl md:text-7xl font-bold mb-8"
-            style={{
-              transform: `translateY(${scrollY * -0.2}px)`,
-            }}
-          >
-            Authentic Adire Fashion
-          </h1>
-          
-          <p 
-            className="text-xl md:text-2xl mb-16 max-w-2xl mx-auto"
-            style={{
-              transform: `translateY(${scrollY * -0.1}px)`,
-            }}
-          >
-            Traditional Nigerian craftsmanship reimagined for the modern world
-          </p>
-          
-          <div
-            style={{
-              transform: `translateY(${scrollY * -0.15}px)`,
-            }}
-          >
-            <Link 
-              to="/products" 
-              className="bg-juwura-brown text-juwura-cream border-2 border-juwura-cream px-8 py-4 rounded-md text-lg font-medium hover:bg-juwura-cream hover:text-juwura-brown transition-all duration-300"
-            >
-              Explore Collection
-            </Link>
+          <div className="space-y-8">
+            <div className="relative">
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-juwura-brown to-juwura-terracotta">
+                Jùwúrà Adire
+              </h1>
+              <div className="absolute top-0 left-0 w-full h-1 bg-juwura-brown/50" />
+              <div className="absolute bottom-0 right-0 w-1/2 h-1 bg-juwura-terracotta/50" />
+            </div>
+            
+            <p className="text-xl md:text-2xl mb-16 max-w-2xl mx-auto opacity-90">
+              Discover the beauty of Nigerian heritage through our handcrafted adire textiles
+            </p>
+            
+            <div className="relative">
+              <Link 
+                to="/products" 
+                className="relative inline-flex items-center justify-center px-8 py-4 rounded-md text-lg font-medium group"
+              >
+                <span className="absolute inset-0 bg-juwura-brown/50 rounded-md transition-all duration-300 group-hover:bg-juwura-brown/70" />
+                <span className="relative text-juwura-cream border-2 border-juwura-cream px-8 py-4 rounded-md text-lg font-medium transition-all duration-300 group-hover:bg-juwura-cream group-hover:text-juwura-brown">
+                  Explore Our Collection
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
 
+        {/* Cultural Elements */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="hidden md:block">
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 ml-12">
+              <img 
+                src="/adire1.png" 
+                alt="Adire Pattern" 
+                className="w-48 h-48 object-cover opacity-20"
+                style={{
+                  transform: `translateX(${scrollY * 0.1}px)`,
+                  transition: "transform 0.3s ease-out"
+                }}
+              />
+            </div>
+            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-12">
+              <img 
+                src="/adire2.png" 
+                alt="Adire Pattern" 
+                className="w-48 h-48 object-cover opacity-20"
+                style={{
+                  transform: `translateX(${-scrollY * 0.1}px)`,
+                  transition: "transform 0.3s ease-out"
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
         <div 
           className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce"
           style={{
             opacity: Math.max(0, 1 - scrollY * 0.003),
           }}
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="32" 
-            height="32" 
-            fill="white" 
-            viewBox="0 0 16 16"
-          >
-            <path d="M8 15a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 1 0v9a.5.5 0 0 1-.5.5z" />
-            <path d="M8 5a.5.5 0 0 1-.5-.5V2.707l-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 1 1-.708.708L8.5 2.707V4.5a.5.5 0 0 1-.5.5z" />
-          </svg>
+          <div className="relative">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="32" 
+              height="32" 
+              fill="white" 
+              viewBox="0 0 16 16"
+            >
+              <path d="M8 15a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 1 0v9a.5.5 0 0 1-.5.5z" />
+              <path d="M8 5a.5.5 0 0 1-.5-.5V2.707l-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 1 1-.708.708L8.5 2.707V4.5a.5.5 0 0 1-.5.5z" />
+            </svg>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-juwura-brown" />
+          </div>
         </div>
       </div>
 
@@ -175,7 +210,14 @@ const Index = () => {
           </div>
 
           <div className="fade-in-element opacity-0">
-            <RotatingCube />
+            <div className="relative rounded-lg overflow-hidden shadow-xl">
+              <img 
+                src="/adire2.png" 
+                alt="Traditional Adire Textile" 
+                className="w-full h-96 object-cover transform transition-all duration-1000 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/10 transition-all duration-1000 hover:bg-black/20" />
+            </div>
           </div>
         </div>
       </ParallaxSection>
@@ -218,14 +260,14 @@ const Index = () => {
       <ParallaxSection bgColor="#FEF7E5" speed={0.2} spacing="large">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1 fade-in-element opacity-0">
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1586015075099-d36c315ccbe5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Adire craftsmanship"
-                className="rounded-lg shadow-xl"
-              />
-              <div className="adire-pattern adire-pattern-1 absolute inset-0 mix-blend-overlay"></div>
-            </div>
+              <div className="relative rounded-lg overflow-hidden shadow-xl">
+                <img 
+                  src="/adire6.png" 
+                  alt="Adire craftsmanship" 
+                  className="w-full h-96 object-cover transform transition-all duration-1000 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/10 transition-all duration-1000 hover:bg-black/20" />
+              </div>
           </div>
 
           <div className="order-1 md:order-2 fade-in-element opacity-0">
@@ -280,6 +322,7 @@ const Index = () => {
       </ParallaxSection>
     </div>
   );
+
 };
 
 export default Index;

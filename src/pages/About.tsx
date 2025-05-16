@@ -33,15 +33,32 @@ const About = () => {
     <div className="pt-16">
       {/* Hero */}
       <ParallaxSection 
-        bgImage="https://images.unsplash.com/photo-1517840545241-b491010a8af4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
+        bgImage="/bam.png"
         speed={0.3}
-        className="min-h-[60vh] bg-juwura-brown/50"
+        className="min-h-[80vh] bg-juwura-brown/50"
       >
-        <div className="text-center text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Our Story</h1>
-          <p className="text-xl max-w-3xl mx-auto">
-            Celebrating Nigerian heritage through authentic adire fashion
-          </p>
+        <div className="container mx-auto px-4 py-20">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-juwura-gold">
+              Our Story
+            </h1>
+            <div className="text-white mb-12">
+              <p className="text-xl md:text-2xl mb-6">
+                Celebrating Nigerian heritage through authentic adire fashion
+              </p>
+              <p className="text-lg md:text-xl">
+                Discover the journey of Jùwúrà - where tradition meets modernity in every stitch
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <a 
+                href="#story"
+                className="inline-block bg-juwura-gold text-juwura-brown px-8 py-3 rounded-full text-lg font-semibold hover:bg-juwura-gold/90 transition-colors"
+              >
+                Learn Our Story
+              </a>
+            </div>
+          </div>
         </div>
       </ParallaxSection>
 
@@ -69,7 +86,7 @@ const About = () => {
           <div className="fade-in-element opacity-0">
             <div className="relative rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1489367874814-f5d040621dd8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                src="/ore.png" 
                 alt="Founder of Jùwúrà" 
                 className="w-full"
               />
@@ -148,8 +165,8 @@ const About = () => {
 
           <div className="fade-in-element opacity-0">
             <img 
-              src="https://images.unsplash.com/photo-1593344484962-796055d4a3a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Adire craftsmanship" 
+              src="/machine.png" 
+              alt="Adire dyeing process" 
               className="rounded-lg shadow-lg"
             />
           </div>
@@ -158,7 +175,7 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1 fade-in-element opacity-0">
             <img 
-              src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+              src="/ope.png" 
               alt="Adire dyeing process" 
               className="rounded-lg shadow-lg"
             />
@@ -198,7 +215,7 @@ const About = () => {
           <div className="text-center fade-in-element opacity-0">
             <div className="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6">
               <img 
-                src="https://images.unsplash.com/photo-1550945771-515f118cef86?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                src="/ore.png" 
                 alt="Oreoluwa Obabiyi-Nicol" 
                 className="w-full h-full object-cover"
               />
@@ -214,8 +231,8 @@ const About = () => {
           <div className="text-center fade-in-element opacity-0">
             <div className="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6">
               <img 
-                src="https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                alt="Team member" 
+                src="/adire6.png" 
+                alt="Adewale Johnson" 
                 className="w-full h-full object-cover"
               />
             </div>
@@ -230,15 +247,15 @@ const About = () => {
           <div className="text-center fade-in-element opacity-0">
             <div className="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6">
               <img 
-                src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                alt="Team member" 
+                src="/ope.png" 
+                alt="Opeyemi Kahyrm" 
                 className="w-full h-full object-cover"
               />
             </div>
-            <h3 className="text-xl font-bold">Amina Bello</h3>
+            <h3 className="text-xl font-bold">Opeyemi Kahyrm</h3>
             <p className="text-juwura-cream/80 mb-4">Design Lead</p>
             <p className="text-sm">
-              A graduate of Lagos Fashion School, Amina brings contemporary design sensibilities 
+              A graduate of Lagos Fashion School, Opeyemi brings contemporary design sensibilities 
               while maintaining deep respect for traditional adire patterns.
             </p>
           </div>
