@@ -88,12 +88,12 @@ const Index = () => {
         <div className="absolute inset-0 bg-black/30 backdrop-blur-lg" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574272106748-009d64305b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')] opacity-20 mix-blend-overlay" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
-      <div 
-          className="absolute inset-0 bg-juwura-brown/40"
-          style={{
-            transform: `translateY(${scrollY * 0.3}px)`,
-          }}
-        />
+        <div 
+            className="absolute inset-0 bg-juwura-brown/40"
+            style={{
+              transform: `translateY(${scrollY * 0.3}px)`,
+            }}
+          />
         
         <div className="container mx-auto px-4 relative z-10 text-center text-white py-16 max-w-4xl">
           <div className="mb-12">
@@ -111,14 +111,14 @@ const Index = () => {
           <div className="space-y-8">
             <div className="relative">
               <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-juwura-brown to-juwura-terracotta">
-                Jùwúrà Adire
+                Jùwúrà NG
               </h1>
               <div className="absolute top-0 left-0 w-full h-1 bg-juwura-brown/50" />
               <div className="absolute bottom-0 right-0 w-1/2 h-1 bg-juwura-terracotta/50" />
             </div>
             
             <p className="text-xl md:text-2xl mb-16 max-w-2xl mx-auto opacity-90">
-              Discover the beauty of Nigerian heritage through our handcrafted adire textiles
+              Discover the beauty of Nigerian heritage through our styles
             </p>
             
             <div className="relative">
@@ -190,16 +190,12 @@ const Index = () => {
       <ParallaxSection bgColor="#FEF7E5" speed={0.3} spacing="xl">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="fade-in-element opacity-0">
-            <h2 className="text-3xl md:text-5xl font-bold mb-8">Our Story</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-8">About Us</h2>
             <p className="text-lg mb-8">
-              Jùwúrà is an authentic adire clothing brand founded by Oreoluwa Obabiyi-Nicol
-              in Lagos, Nigeria. Our mission is to preserve the rich cultural heritage of adire 
-              textile art while creating contemporary fashion that resonates with the modern world.
+             JÙWÚRÀ is a fashion-forward clothing brand that blends contemporary design with cultural identity and streetwear influence. Our mission is to empower individuals through style, authenticity, and storytelling in fashion.
             </p>
             <p className="text-lg mb-8">
-              Every piece in our collection is meticulously crafted using traditional techniques 
-              passed down through generations, ensuring the authenticity and quality that 
-              adire is known for.
+             The name "Jùwúrà" draws inspiration from Yoruba language, embodying the essence of elegance and cultural pride that defines our brand. Each syllable carries with it the weight of tradition and the promise of innovation.
             </p>
             <Link 
               to="/about" 
@@ -212,7 +208,7 @@ const Index = () => {
           <div className="fade-in-element opacity-0">
             <div className="relative rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="/adire2.png" 
+                src="/about.png" 
                 alt="Traditional Adire Textile" 
                 className="w-full h-96 object-cover transform transition-all duration-1000 hover:scale-105"
               />
