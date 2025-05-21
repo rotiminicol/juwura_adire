@@ -1,33 +1,19 @@
 
-import { ReactNode, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout = ({ children }: LayoutProps) => {
-  // Enhanced smooth scroll to top on page load
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-    
-    // Add smooth scrolling to the entire document
-    document.documentElement.style.scrollBehavior = "smooth";
-    
-    return () => {
-      document.documentElement.style.scrollBehavior = "";
-    };
-  }, []);
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex-grow pt-16 w-full overflow-x-hidden">{children}</main>
-      <Footer />
+      <main className="flex-grow">
+        {children}
+      </main>
+      {isHomePage && <Footer />}
     </div>
   );
 };

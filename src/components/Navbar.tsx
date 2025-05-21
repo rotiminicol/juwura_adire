@@ -65,31 +65,47 @@ const Navbar = () => {
           <Link to="/contact" className="font-medium text-lg tracking-wide hover:text-juwura-terracotta transition-all duration-300 transform hover:translate-y-0.5 hover:scale-105">
             Contact
           </Link>
-          {cartItems.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-juwura-terracotta text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-              {cartItems.length}
-            </span>
-          )}
-          <Link to="/cart" className="group relative">
+          <Link 
+            to="/cart" 
+            className="group relative flex items-center justify-center p-2 hover:text-juwura-terracotta transition-all duration-300"
+          >
             <ShoppingCart className="w-6 h-6 transition-transform group-hover:scale-110" />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-juwura-terracotta text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium">
+                {cartItems.length}
+              </span>
+            )}
           </Link>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
-          data-menu-button
-          className="md:hidden z-50 text-juwura-brown p-2"
-          onClick={(e) => {
-            e.stopPropagation();
-            setMobileMenuOpen(!mobileMenuOpen);
-          }}
-        >
-          {mobileMenuOpen ? (
-            <span className="text-2xl">✕</span>
-          ) : (
-            <span className="text-2xl">☰</span>
-          )}
-        </button>
+        <div className="md:hidden flex items-center gap-4">
+          <Link 
+            to="/cart" 
+            className="relative flex items-center justify-center p-2"
+          >
+            <ShoppingCart className="w-6 h-6" />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-juwura-terracotta text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium">
+                {cartItems.length}
+              </span>
+            )}
+          </Link>
+          <button 
+            data-menu-button
+            className="z-50 text-juwura-brown p-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              setMobileMenuOpen(!mobileMenuOpen);
+            }}
+          >
+            {mobileMenuOpen ? (
+              <span className="text-2xl">✕</span>
+            ) : (
+              <span className="text-2xl">☰</span>
+            )}
+          </button>
+        </div>
 
         {/* Mobile Navigation */}
         <div 
@@ -101,28 +117,28 @@ const Navbar = () => {
           <div className="flex flex-col p-8 pt-24 space-y-4">
             <Link 
               to="/" 
-              className="text-lg font-medium p-2"
+              className="text-lg font-medium p-2 hover:text-juwura-terracotta transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link 
               to="/about" 
-              className="text-lg font-medium p-2"
+              className="text-lg font-medium p-2 hover:text-juwura-terracotta transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               About
             </Link>
             <Link 
               to="/products" 
-              className="text-lg font-medium p-2"
+              className="text-lg font-medium p-2 hover:text-juwura-terracotta transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Products
             </Link>
             <Link 
               to="/contact" 
-              className="text-lg font-medium p-2"
+              className="text-lg font-medium p-2 hover:text-juwura-terracotta transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
