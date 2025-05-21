@@ -22,8 +22,8 @@ const Navbar = () => {
   useEffect(() => {
     if (!mobileMenuOpen) return;
     
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
+    const handleClickOutside = (e) => {
+      const target = e.target;
       const isMenuButton = target.closest('[data-menu-button]');
       const isMenuContent = target.closest('[data-menu-content]');
       
@@ -84,7 +84,7 @@ const Navbar = () => {
             to="/cart" 
             className="relative flex items-center justify-center p-2"
           >
-            <ShoppingCart className="w-6 h-6" />
+            <ShoppingCart className="w-6 h-6 text-juwura-brown" />
             {cartItems.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-juwura-terracotta text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium">
                 {cartItems.length}
@@ -110,35 +110,35 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         <div 
           data-menu-content
-          className={`fixed top-0 right-0 h-full w-full md:w-64 bg-juwura-cream shadow-lg z-40 transform transition-transform ${
+          className={`fixed top-0 right-0 h-full w-3/4 sm:w-64 bg-juwura-cream/95 backdrop-blur-md shadow-2xl z-40 transform transition-transform duration-300 ease-in-out ${
             mobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex flex-col p-8 pt-24 space-y-4">
+          <div className="flex flex-col p-8 pt-24 space-y-6 bg-juwura-cream">
             <Link 
               to="/" 
-              className="text-lg font-medium p-2 hover:text-juwura-terracotta transition-colors"
+              className="text-xl font-semibold p-3 text-juwura-brown hover:bg-juwura-terracotta/10 hover:text-juwura-terracotta rounded-lg transition-colors duration-200"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link 
               to="/about" 
-              className="text-lg font-medium p-2 hover:text-juwura-terracotta transition-colors"
+              className="text-xl font-semibold p-3 text-juwura-brown hover:bg-juwura-terracotta/10 hover:text-juwura-terracotta rounded-lg transition-colors duration-200"
               onClick={() => setMobileMenuOpen(false)}
             >
               About
             </Link>
             <Link 
               to="/products" 
-              className="text-lg font-medium p-2 hover:text-juwura-terracotta transition-colors"
+              className="text-xl font-semibold p-3 text-juwura-brown hover:bg-juwura-terracotta/10 hover:text-juwura-terracotta rounded-lg transition-colors duration-200"
               onClick={() => setMobileMenuOpen(false)}
             >
               Products
             </Link>
             <Link 
               to="/contact" 
-              className="text-lg font-medium p-2 hover:text-juwura-terracotta transition-colors"
+              className="text-xl font-semibold p-3 text-juwura-brown hover:bg-juwura-terracotta/10 hover:text-juwura-terracotta rounded-lg transition-colors duration-200"
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
