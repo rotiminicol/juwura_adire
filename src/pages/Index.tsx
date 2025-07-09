@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
@@ -164,41 +165,68 @@ const Index = () => {
         bgColor="#FEF7E5"
         speed={0.25}
         spacing="xl"
-        className="relative py-12 sm:py-16"
+        className="relative py-16 sm:py-24"
       >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-center mb-8 sm:mb-12"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-juwura-brown">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-juwura-brown font-playfair">
             Featured Collection
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-juwura-brown/80">
+          <p className="text-lg sm:text-xl md:text-2xl text-juwura-brown/80 max-w-2xl mx-auto">
             Explore our bestsellers and new arrivals
           </p>
         </motion.div>
-        <div className="bg-white/90 border border-juwura-gold/20 rounded-3xl shadow-xl p-4 sm:p-8 md:p-10 lg:p-12">
-          <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-            {sampleProducts.slice(0, 6).map((product, idx) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.08 }}
-                className="fade-in-element opacity-0"
-              >
-                <ProductCard {...product} />
-              </motion.div>
-            ))}
+        
+        {/* Infinite width container for cards */}
+        <div className="w-full overflow-hidden">
+          <div className="bg-white/95 border border-juwura-gold/30 rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16 mx-4 sm:mx-6 md:mx-8">
+            <div className="w-full">
+              {/* Desktop Grid */}
+              <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12 xl:gap-16">
+                {sampleProducts.slice(0, 6).map((product, idx) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: idx * 0.08 }}
+                    className="fade-in-element opacity-0 flex justify-center"
+                  >
+                    <ProductCard {...product} cardClassName="w-full max-w-[400px] h-[500px]" />
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Mobile Horizontal Scroll */}
+              <div className="md:hidden">
+                <div className="flex gap-6 overflow-x-auto pb-4 px-2" style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
+                  {sampleProducts.slice(0, 6).map((product, idx) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: idx * 0.08 }}
+                      className="fade-in-element opacity-0 flex-shrink-0"
+                      style={{ scrollSnapAlign: 'start' }}
+                    >
+                      <ProductCard {...product} cardClassName="w-[280px] h-[400px]" />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="text-center mt-8 sm:mt-12">
+        
+        <div className="text-center mt-12 sm:mt-16">
           <Link to="/products">
-            <Button className="bg-juwura-brown text-juwura-cream px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg hover:bg-juwura-terracotta transition">
+            <Button className="bg-juwura-brown text-juwura-cream px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-semibold rounded-xl hover:bg-juwura-terracotta transition shadow-lg">
               View All Products
             </Button>
           </Link>
@@ -211,22 +239,22 @@ const Index = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, delay: 0.1 }}
-        className="bg-juwura-brown py-12 sm:py-16"
+        className="bg-juwura-brown py-16 sm:py-24"
       >
-        <div className="max-w-lg sm:max-w-xl mx-auto text-center px-4 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-juwura-cream mb-4 sm:mb-6">
+        <div className="max-w-2xl mx-auto text-center px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-juwura-cream mb-6 sm:mb-8 font-playfair">
             Join the Jùwúrà Community
           </h2>
-          <p className="text-base sm:text-lg text-juwura-cream/90 mb-6 sm:mb-8">
+          <p className="text-lg sm:text-xl text-juwura-cream/90 mb-8 sm:mb-12">
             Be the first to know about new collections, exclusive events, and special offers.
           </p>
-          <form className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+          <form className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
             <input
               type="email"
               placeholder="Your email address"
-              className="px-4 py-3 rounded-lg flex-grow bg-white/90 text-juwura-brown text-sm sm:text-base"
+              className="px-6 py-4 rounded-xl flex-grow bg-white/95 text-juwura-brown text-base sm:text-lg"
             />
-            <Button className="bg-juwura-gold text-juwura-brown hover:bg-juwura-cream px-6 py-3 text-base sm:text-lg rounded-lg">
+            <Button className="bg-juwura-gold text-juwura-brown hover:bg-juwura-cream px-8 py-4 text-lg sm:text-xl rounded-xl font-semibold">
               Subscribe
             </Button>
           </form>
