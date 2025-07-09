@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
@@ -55,6 +54,20 @@ const sampleProducts = [
     price: 12000,
     image: "/wed4.png",
     description: "Versatile wrap skirt in vibrant adire fabric.",
+  },
+  {
+    id: 7,
+    name: "Traditional Agbada",
+    price: 45000,
+    image: "/wed5.png",
+    description: "Classic Nigerian agbada with modern adire touches.",
+  },
+  {
+    id: 8,
+    name: "Adire Home Set",
+    price: 28000,
+    image: "/wed6.png",
+    description: "Beautiful home décor set with traditional patterns.",
   },
 ];
 
@@ -182,13 +195,13 @@ const Index = () => {
           </p>
         </motion.div>
         
-        {/* Infinite width container for cards */}
-        <div className="w-full overflow-hidden">
+        {/* Full width container for cards */}
+        <div className="w-full overflow-visible">
           <div className="bg-white/95 border border-juwura-gold/30 rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16 mx-4 sm:mx-6 md:mx-8">
             <div className="w-full">
-              {/* Desktop Grid */}
-              <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12 xl:gap-16">
-                {sampleProducts.slice(0, 6).map((product, idx) => (
+              {/* Desktop Grid - 4 cards per row, 2 rows = 8 cards total */}
+              <div className="hidden md:grid grid-cols-4 gap-6 lg:gap-8">
+                {sampleProducts.slice(0, 8).map((product, idx) => (
                   <motion.div
                     key={product.id}
                     initial={{ opacity: 0, y: 30 }}
@@ -197,14 +210,14 @@ const Index = () => {
                     transition={{ duration: 0.6, delay: idx * 0.08 }}
                     className="fade-in-element opacity-0 flex justify-center"
                   >
-                    <ProductCard {...product} cardClassName="w-full max-w-[400px] h-[500px]" />
+                    <ProductCard {...product} cardClassName="w-full h-[450px]" />
                   </motion.div>
                 ))}
               </div>
               
-              {/* Mobile Horizontal Scroll */}
-              <div className="md:hidden">
-                <div className="flex gap-6 overflow-x-auto pb-4 px-2" style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
+              {/* Mobile Horizontal Scroll - Full width */}
+              <div className="md:hidden w-full">
+                <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2" style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
                   {sampleProducts.slice(0, 6).map((product, idx) => (
                     <motion.div
                       key={product.id}
@@ -215,7 +228,7 @@ const Index = () => {
                       className="fade-in-element opacity-0 flex-shrink-0"
                       style={{ scrollSnapAlign: 'start' }}
                     >
-                      <ProductCard {...product} cardClassName="w-[280px] h-[400px]" />
+                      <ProductCard {...product} cardClassName="w-[300px] h-[400px]" />
                     </motion.div>
                   ))}
                 </div>
@@ -232,34 +245,6 @@ const Index = () => {
           </Link>
         </div>
       </ParallaxSection>
-
-      {/* NEWSLETTER SIGNUP */}
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, delay: 0.1 }}
-        className="bg-juwura-brown py-16 sm:py-24"
-      >
-        <div className="max-w-2xl mx-auto text-center px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-juwura-cream mb-6 sm:mb-8 font-playfair">
-            Join the Jùwúrà Community
-          </h2>
-          <p className="text-lg sm:text-xl text-juwura-cream/90 mb-8 sm:mb-12">
-            Be the first to know about new collections, exclusive events, and special offers.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="px-6 py-4 rounded-xl flex-grow bg-white/95 text-juwura-brown text-base sm:text-lg"
-            />
-            <Button className="bg-juwura-gold text-juwura-brown hover:bg-juwura-cream px-8 py-4 text-lg sm:text-xl rounded-xl font-semibold">
-              Subscribe
-            </Button>
-          </form>
-        </div>
-      </motion.section>
     </motion.div>
   );
 };

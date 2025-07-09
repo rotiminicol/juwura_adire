@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-juwura-cream via-white to-juwura-beige/60">
       <Navbar />
-      <main className="flex-grow pt-16 md:pt-20">
+      <main className="flex-grow">
         {children}
       </main>
       {isHomePage && <Footer />}

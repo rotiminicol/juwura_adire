@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import ParallaxSection from "@/components/ParallaxSection";
 import ProductCard from "../components/ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Users, User, Gift, Home, Star } from "lucide-react";
+import { Sparkles, Users, User, Gift, Home, Star, ChevronDown } from "lucide-react";
 
 const categories = [
   { name: "All", icon: Sparkles },
@@ -204,12 +205,12 @@ const Products = () => {
   }, [filteredProducts]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-juwura-cream via-white to-juwura-beige/50">
-      {/* Enhanced Hero Section */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-juwura-brown/90 via-juwura-terracotta/80 to-juwura-gold/60 overflow-hidden">
-        {/* Enhanced Animated Background */}
+    <div className="min-h-screen bg-gradient-to-br from-juwura-cream via-white to-juwura-beige/50 pt-20">
+      {/* Enhanced Hero Section without gradient overlay */}
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Clean Background Images */}
         <motion.div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-30"
           initial={{ scale: 1.2 }}
           animate={{ scale: 1 }}
           transition={{ duration: 2 }}
@@ -218,25 +219,25 @@ const Products = () => {
             src="/wed2.png"
             alt="Adire Hero 1"
             initial={{ opacity: 0, y: 60, rotate: -8 }}
-            animate={{ opacity: 0.3, y: 0, rotate: -5 }}
+            animate={{ opacity: 0.4, y: 0, rotate: -5 }}
             transition={{ duration: 1.5, delay: 0.2 }}
-            className="absolute left-0 top-0 w-1/3 max-w-sm pointer-events-none"
+            className="absolute left-0 top-0 w-1/3 max-w-sm pointer-events-none object-cover"
           />
           <motion.img
             src="/wed3.png"
             alt="Adire Hero 2"
             initial={{ opacity: 0, y: -60, rotate: 8 }}
-            animate={{ opacity: 0.25, y: 0, rotate: 5 }}
+            animate={{ opacity: 0.35, y: 0, rotate: 5 }}
             transition={{ duration: 1.5, delay: 0.4 }}
-            className="absolute right-0 top-0 w-1/3 max-w-sm pointer-events-none"
+            className="absolute right-0 top-0 w-1/3 max-w-sm pointer-events-none object-cover"
           />
           <motion.img
             src="/adire1.png"
             alt="Adire Hero 3"
             initial={{ opacity: 0, y: 60, rotate: -3 }}
-            animate={{ opacity: 0.2, y: 0, rotate: 0 }}
+            animate={{ opacity: 0.3, y: 0, rotate: 0 }}
             transition={{ duration: 1.5, delay: 0.6 }}
-            className="absolute left-1/4 bottom-0 w-1/4 max-w-xs pointer-events-none"
+            className="absolute left-1/4 bottom-0 w-1/4 max-w-xs pointer-events-none object-cover"
           />
         </motion.div>
 
@@ -244,17 +245,17 @@ const Products = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="relative z-10 text-center text-white max-w-5xl mx-auto px-4 sm:px-6 py-20"
+          className="relative z-10 text-center text-juwura-brown max-w-5xl mx-auto px-4 sm:px-6 py-20"
         >
           <motion.div
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 sm:mb-8 font-playfair drop-shadow-2xl">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 sm:mb-8 font-playfair drop-shadow-lg">
               Discover Our Adire Collection
             </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl max-w-3xl mx-auto drop-shadow-lg leading-relaxed">
+            <p className="text-xl sm:text-2xl md:text-3xl max-w-3xl mx-auto leading-relaxed drop-shadow-md">
               Experience the timeless beauty of Nigerian craftsmanship with our hand-dyed adire pieces.
             </p>
           </motion.div>
@@ -266,34 +267,68 @@ const Products = () => {
         <div className="w-full mx-auto px-4 sm:px-6">
           <div className="bg-white/95 backdrop-blur-sm border border-juwura-gold/30 rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16">
             <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="w-full">
-              {/* Enhanced TabsList */}
+              
+              {/* Desktop Category Filters */}
               <div className="mb-12 sm:mb-16">
-                <TabsList className="w-full flex flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12 p-2 min-h-[80px] bg-gradient-to-r from-juwura-gold/20 to-juwura-cream/40 backdrop-blur-sm rounded-2xl border border-juwura-gold/30 shadow-xl">
-                  {categories.map((category) => {
-                    const IconComponent = category.icon;
-                    return (
-                      <TabsTrigger
-                        key={category.name}
-                        value={category.name}
-                        className={`flex items-center gap-2 px-6 sm:px-8 py-4 sm:py-5 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-juwura-gold shadow-md hover:shadow-lg ${
-                          activeTab === category.name
-                            ? "bg-gradient-to-r from-juwura-brown to-juwura-terracotta text-white shadow-xl scale-105"
-                            : "bg-white/90 text-juwura-brown hover:bg-juwura-brown/10 border border-juwura-brown/20 hover:scale-102"
-                        }`}
-                      >
-                        <IconComponent className="w-5 h-5" />
-                        <span className="hidden sm:inline">{category.name}</span>
-                        <span className="sm:hidden">
-                          {category.name === "Women's Wear" ? "Women" :
-                           category.name === "Men's Wear" ? "Men" :
-                           category.name === "Home Décor" ? "Home" :
-                           category.name === "New Arrival" ? "New" :
-                           category.name}
-                        </span>
-                      </TabsTrigger>
-                    );
-                  })}
-                </TabsList>
+                {/* Desktop Tabs */}
+                <div className="hidden md:block">
+                  <TabsList className="w-full flex flex-wrap justify-center gap-3 mb-8 sm:mb-12 p-3 min-h-[60px] bg-gradient-to-r from-juwura-gold/20 to-juwura-cream/40 backdrop-blur-sm rounded-2xl border border-juwura-gold/30 shadow-xl">
+                    {categories.map((category) => {
+                      const IconComponent = category.icon;
+                      return (
+                        <TabsTrigger
+                          key={category.name}
+                          value={category.name}
+                          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-juwura-gold shadow-md hover:shadow-lg h-12 ${
+                            activeTab === category.name
+                              ? "bg-gradient-to-r from-juwura-brown to-juwura-terracotta text-white shadow-xl scale-105"
+                              : "bg-white/90 text-juwura-brown hover:bg-juwura-brown/10 border border-juwura-brown/20 hover:scale-102"
+                          }`}
+                        >
+                          <IconComponent className="w-4 h-4" />
+                          <span>{category.name}</span>
+                        </TabsTrigger>
+                      );
+                    })}
+                  </TabsList>
+                </div>
+
+                {/* Mobile Dropdown */}
+                <div className="md:hidden mb-8">
+                  <Select value={activeTab} onValueChange={setActiveTab}>
+                    <SelectTrigger className="w-full bg-white/90 border-2 border-juwura-brown/30 rounded-xl p-4 text-lg font-semibold text-juwura-brown h-14 shadow-lg">
+                      <div className="flex items-center gap-3">
+                        {(() => {
+                          const category = categories.find(cat => cat.name === activeTab);
+                          const IconComponent = category?.icon || Sparkles;
+                          return (
+                            <>
+                              <IconComponent className="w-5 h-5" />
+                              <SelectValue placeholder="Select Category" />
+                            </>
+                          );
+                        })()}
+                      </div>
+                    </SelectTrigger>
+                    <SelectContent className="bg-white/95 backdrop-blur-sm border border-juwura-gold/30 rounded-xl shadow-2xl">
+                      {categories.map((category) => {
+                        const IconComponent = category.icon;
+                        return (
+                          <SelectItem 
+                            key={category.name} 
+                            value={category.name}
+                            className="flex items-center gap-3 p-4 text-lg font-medium text-juwura-brown hover:bg-juwura-brown/10 rounded-lg cursor-pointer"
+                          >
+                            <div className="flex items-center gap-3">
+                              <IconComponent className="w-5 h-5" />
+                              <span>{category.name}</span>
+                            </div>
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
 
               <AnimatePresence>
@@ -327,29 +362,54 @@ const Products = () => {
                         </p>
                       </motion.div>
 
-                      {/* Products Grid */}
+                      {/* Products Grid - Full width on mobile */}
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-12 justify-center items-stretch"
+                        className="w-full"
                       >
-                        {filteredProducts.map((product, idx) => (
-                          <motion.div
-                            key={product.id}
-                            className="fade-in-element opacity-0 flex justify-center items-stretch"
-                            initial={{ y: 40, opacity: 0, scale: 0.9 }}
-                            animate={{ y: 0, opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.6, delay: idx * 0.08 }}
-                            whileHover={{ y: -5 }}
-                          >
-                            <ProductCard 
-                              {...product} 
-                              isNewArrival={product.isNewArrival} 
-                              cardClassName="w-full max-w-[360px] h-[520px] bg-white/95 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-juwura-gold/30 rounded-2xl transition-all duration-300" 
-                            />
-                          </motion.div>
-                        ))}
+                        {/* Mobile Grid - Full width */}
+                        <div className="block md:hidden">
+                          <div className="grid grid-cols-2 gap-4 w-full">
+                            {filteredProducts.map((product, idx) => (
+                              <motion.div
+                                key={product.id}
+                                className="fade-in-element opacity-0 w-full"
+                                initial={{ y: 40, opacity: 0, scale: 0.9 }}
+                                animate={{ y: 0, opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.6, delay: idx * 0.08 }}
+                                whileHover={{ y: -5 }}
+                              >
+                                <ProductCard 
+                                  {...product} 
+                                  isNewArrival={product.isNewArrival} 
+                                  cardClassName="w-full h-[420px] bg-white/95 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-juwura-gold/30 rounded-2xl transition-all duration-300" 
+                                />
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Desktop Grid */}
+                        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-12 justify-center items-stretch">
+                          {filteredProducts.map((product, idx) => (
+                            <motion.div
+                              key={product.id}
+                              className="fade-in-element opacity-0 flex justify-center items-stretch"
+                              initial={{ y: 40, opacity: 0, scale: 0.9 }}
+                              animate={{ y: 0, opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.6, delay: idx * 0.08 }}
+                              whileHover={{ y: -5 }}
+                            >
+                              <ProductCard 
+                                {...product} 
+                                isNewArrival={product.isNewArrival} 
+                                cardClassName="w-full max-w-[360px] h-[520px] bg-white/95 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-juwura-gold/30 rounded-2xl transition-all duration-300" 
+                              />
+                            </motion.div>
+                          ))}
+                        </div>
                       </motion.div>
 
                       {filteredProducts.length === 0 && (
