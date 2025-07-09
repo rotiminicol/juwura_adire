@@ -1,7 +1,8 @@
+
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Package, Clock, Truck, X, CreditCard, Building2 } from "lucide-react";
+import { CheckCircle, Package, Clock, Truck, X } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface OrderItem {
@@ -28,7 +29,6 @@ const Confirmation = () => {
   const location = useLocation();
   const [order, setOrder] = useState<Order | null>(null);
   const [customer, setCustomer] = useState<Customer | null>(null);
-  const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [showModal, setShowModal] = useState(true);
 
   useEffect(() => {
@@ -37,9 +37,6 @@ const Confirmation = () => {
     }
     if (location.state?.customer) {
       setCustomer(location.state.customer);
-    }
-    if (location.state?.paymentMethod) {
-      setPaymentMethod(location.state.paymentMethod);
     }
   }, [location.state]);
 
@@ -83,14 +80,8 @@ const Confirmation = () => {
               <div className="flex items-center gap-3">
                 <Clock className="w-6 h-6 text-juwura-brown" />
                 <div>
-                  <p className="font-semibold text-juwura-brown">
-                    {paymentMethod === 'transfer' ? 'Awaiting Payment' : 'Processing'}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    {paymentMethod === 'transfer' 
-                      ? 'Please complete your bank transfer' 
-                      : "We're preparing your order"}
-                  </p>
+                  <p className="font-semibold text-juwura-brown">Processing</p>
+                  <p className="text-sm text-gray-600">We're preparing your order</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 opacity-50">
@@ -109,36 +100,6 @@ const Confirmation = () => {
               </div>
             </div>
           </div>
-
-          {/* Payment Method Info */}
-          {paymentMethod && (
-            <div className="mb-8 p-6 bg-blue-50 rounded-2xl border border-blue-200">
-              <div className="flex items-center gap-3 mb-4">
-                {paymentMethod === 'card' ? (
-                  <CreditCard className="w-6 h-6 text-blue-600" />
-                ) : (
-                  <Building2 className="w-6 h-6 text-blue-600" />
-                )}
-                <h3 className="text-lg font-semibold text-blue-800">
-                  Payment Method: {paymentMethod === 'card' ? 'Credit/Debit Card' : 'Bank Transfer'}
-                </h3>
-              </div>
-              {paymentMethod === 'transfer' && (
-                <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                  <p className="text-yellow-800 font-medium mb-2">⚠️ Action Required</p>
-                  <p className="text-sm text-yellow-700">
-                    Please complete your bank transfer to the account details provided during checkout. 
-                    Your order will be processed once payment is confirmed.
-                  </p>
-                </div>
-              )}
-              {paymentMethod === 'card' && (
-                <p className="text-green-700 text-sm">
-                  ✅ Payment processed successfully
-                </p>
-              )}
-            </div>
-          )}
 
           {/* Order Details */}
           <div className="grid md:grid-cols-2 gap-8">

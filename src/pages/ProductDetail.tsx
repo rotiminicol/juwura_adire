@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useCart } from "@/contexts/CartContext";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, Home } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Home, ArrowRight } from "lucide-react";
 import { Product } from "@/types";
 
 const products: Product[] = [
@@ -215,6 +219,13 @@ const ProductDetail = () => {
   const { addToCart } = useCart();
   const { toast, dismiss } = useToast();
   const navigate = useNavigate();
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
   const [selectedSize, setSelectedSize] = useState("");
 
   useEffect(() => {
@@ -285,8 +296,16 @@ const ProductDetail = () => {
     setSelectedImage((prev) => (prev - 1 + (product?.images.length || 1)) % (product?.images.length || 1));
   };
 
-  const handleBuyNow = () => {
-    if (!product) return;
+  const handleCheckoutSubmit = () => {
+    if (!formData.name || !formData.email || !formData.phone || !formData.address) {
+      toast({
+        title: "Incomplete Form",
+        description: "Please fill out all fields before proceeding.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
     if (product.sizes && product.sizes.length > 0 && !selectedSize) {
       toast({
         title: "Select a Size",
@@ -296,19 +315,30 @@ const ProductDetail = () => {
       });
       return;
     }
-
-    navigate('/checkout', {
+    if (!product) return;
+    setIsCheckoutOpen(false);
+    navigate('/confirmation', {
       state: {
-        item: {
-          id: product.id,
-          name: product.name + (selectedSize ? ` (${selectedSize})` : ""),
-          image: product.images[0],
-          price: product.price,
-          quantity: quantity,
-          size: selectedSize
-        }
+        order: {
+          items: [{
+            id: product.id,
+            name: product.name + (selectedSize ? ` (${selectedSize})` : ""),
+            image: product.images[0],
+            price: product.price,
+            quantity: quantity
+          }],
+          total: product.price * quantity
+        },
+        customer: formData
       }
     });
+    toast({
+      title: "Order Placed",
+      description: `Your order for ${quantity} x ${product.name}${selectedSize ? ` (${selectedSize})` : ""} has been placed. Please complete payment.`,
+      variant: "default",
+      duration: 3000,
+    });
+    setFormData({ name: '', email: '', phone: '', address: '' });
   };
 
   if (!product) {
@@ -501,14 +531,95 @@ const ProductDetail = () => {
                 >
                   Add to Cart
                 </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={handleBuyNow}
-                  className="border-2 border-juwura-brown text-juwura-brown py-4 px-8 rounded-xl hover:bg-juwura-brown hover:text-white transition-colors shadow-lg font-semibold text-lg w-full"
-                >
-                  Buy Now
-                </motion.button>
+                <Dialog open={isCheckoutOpen} onOpenChange={setIsCheckoutOpen}>
+                  <DialogTrigger asChild>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="border-2 border-juwura-brown text-juwura-brown py-4 px-8 rounded-xl hover:bg-juwura-brown hover:text-white transition-colors shadow-lg font-semibold text-lg w-full"
+                    >
+                      Buy Now
+                    </motion.button>
+                  </DialogTrigger>
+                  <DialogContent className="w-[95vw] max-w-[450px] max-h-[80vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl shadow-2xl border border-juwura-gold/30 overflow-y-auto">
+                    <button
+                      onClick={() => setIsCheckoutOpen(false)}
+                      className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors z-10"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                    
+                    <DialogHeader className="px-6 pt-6 pb-4">
+                      <DialogTitle className="text-2xl font-bold text-juwura-brown font-playfair">Complete Your Purchase</DialogTitle>
+                    </DialogHeader>
+                    
+                    <div className="px-6 pb-6">
+                      <div className="mb-6 p-4 bg-juwura-cream/30 rounded-xl border border-juwura-gold/20">
+                        <div className="flex items-center gap-4">
+                          <img src={product.images[0]} alt={product.name} className="w-16 h-16 object-cover rounded-lg" />
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-juwura-brown">{product.name}</h3>
+                            <p className="text-juwura-terracotta font-bold">₦{(product.price * quantity).toLocaleString()}</p>
+                            <p className="text-sm text-gray-600">Quantity: {quantity}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <form onSubmit={(e) => { e.preventDefault(); handleCheckoutSubmit(); }} className="space-y-4">
+                        <div>
+                          <Label htmlFor="name" className="text-juwura-brown font-medium">Full Name</Label>
+                          <Input
+                            id="name"
+                            type="text"
+                            value={formData.name}
+                            onChange={(e) => setFormData({...formData, name: e.target.value})}
+                            className="mt-1 border-juwura-brown/30 focus:border-juwura-brown rounded-lg"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="email" className="text-juwura-brown font-medium">Email</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            className="mt-1 border-juwura-brown/30 focus:border-juwura-brown rounded-lg"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="phone" className="text-juwura-brown font-medium">Phone Number</Label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                            className="mt-1 border-juwura-brown/30 focus:border-juwura-brown rounded-lg"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="address" className="text-juwura-brown font-medium">Delivery Address</Label>
+                          <Input
+                            id="address"
+                            type="text"
+                            value={formData.address}
+                            onChange={(e) => setFormData({...formData, address: e.target.value})}
+                            className="mt-1 border-juwura-brown/30 focus:border-juwura-brown rounded-lg"
+                            required
+                          />
+                        </div>
+                        <Button
+                          type="submit"
+                          className="w-full bg-juwura-brown text-white py-3 rounded-xl hover:bg-juwura-terracotta transition-colors font-semibold text-lg mt-6"
+                        >
+                          Place Order - ₦{(product.price * quantity).toLocaleString()}
+                        </Button>
+                      </form>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </motion.div>
