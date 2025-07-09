@@ -262,10 +262,11 @@ const Products = () => {
         </motion.div>
       </section>
 
-      {/* Enhanced Products Section */}
+      {/* Enhanced Products Section - Full width on mobile */}
       <section className="w-full py-16 sm:py-24 bg-gradient-to-b from-juwura-cream to-white">
-        <div className="w-full mx-auto px-4 sm:px-6">
-          <div className="bg-white/95 backdrop-blur-sm border border-juwura-gold/30 rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16">
+        <div className="w-full px-0 md:px-6">
+          {/* Full width container on mobile, with background on desktop */}
+          <div className="md:bg-white/95 md:backdrop-blur-sm md:border md:border-juwura-gold/30 md:rounded-3xl md:shadow-2xl md:p-6 sm:md:p-8 lg:md:p-12 xl:md:p-16">
             <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="w-full">
               
               {/* Desktop Category Filters */}
@@ -362,16 +363,16 @@ const Products = () => {
                         </p>
                       </motion.div>
 
-                      {/* Products Grid - Full width on mobile */}
+                      {/* Products Grid - Full width on mobile, single card per row */}
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                         className="w-full"
                       >
-                        {/* Mobile Grid - Full width */}
-                        <div className="block md:hidden">
-                          <div className="grid grid-cols-2 gap-4 w-full">
+                        {/* Mobile Grid - Full width, single card per row */}
+                        <div className="block md:hidden px-4">
+                          <div className="flex flex-col gap-6 w-full">
                             {filteredProducts.map((product, idx) => (
                               <motion.div
                                 key={product.id}
@@ -381,11 +382,13 @@ const Products = () => {
                                 transition={{ duration: 0.6, delay: idx * 0.08 }}
                                 whileHover={{ y: -5 }}
                               >
-                                <ProductCard 
-                                  {...product} 
-                                  isNewArrival={product.isNewArrival} 
-                                  cardClassName="w-full h-[420px] bg-white/95 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-juwura-gold/30 rounded-2xl transition-all duration-300" 
-                                />
+                                <div className="w-full border-4 border-juwura-gold/30 rounded-2xl shadow-lg hover:shadow-2xl hover:border-juwura-gold/60 transition-all duration-300 bg-white">
+                                  <ProductCard 
+                                    {...product} 
+                                    isNewArrival={product.isNewArrival} 
+                                    cardClassName="w-full h-[420px] border-0 shadow-none rounded-2xl" 
+                                  />
+                                </div>
                               </motion.div>
                             ))}
                           </div>

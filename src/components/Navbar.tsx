@@ -136,31 +136,31 @@ const Navbar = () => {
             </motion.button>
           </div>
 
-          {/* Mobile Navigation Overlay */}
+          {/* Mobile Navigation Overlay - Much darker background */}
           <AnimatePresence>
             {mobileMenuOpen && (
               <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.5 }}
+                animate={{ opacity: 0.95 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-juwura-brown/80 z-30 md:hidden"
+                className="fixed inset-0 bg-black/95 z-40 md:hidden"
                 onClick={() => setMobileMenuOpen(false)}
               />
             )}
           </AnimatePresence>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Navigation - Better styling and contrast */}
           <motion.div
             data-menu-content
             initial={{ x: "100%" }}
             animate={{ x: mobileMenuOpen ? 0 : "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`fixed top-0 right-0 h-full w-3/4 sm:w-64 bg-juwura-cream/95 backdrop-blur-md shadow-2xl z-40 transform transition-transform duration-300 ease-in-out ${
+            className={`fixed top-0 right-0 h-full w-3/4 sm:w-64 bg-juwura-brown shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
               mobileMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
             style={{ pointerEvents: mobileMenuOpen ? "auto" : "none" }}
           >
-            <div className="flex flex-col p-8 pt-24 space-y-6 bg-juwura-cream h-full">
+            <div className="flex flex-col p-8 pt-24 space-y-6 bg-juwura-brown h-full">
               {[
                 { to: "/", label: "Home" },
                 { to: "/about", label: "About" },
@@ -174,7 +174,7 @@ const Navbar = () => {
                 >
                   <Link 
                     to={item.to} 
-                    className="text-xl font-semibold p-3 text-juwura-brown hover:bg-juwura-terracotta/10 hover:text-juwura-terracotta rounded-lg transition-all duration-200 block"
+                    className="text-xl font-semibold p-4 text-white hover:bg-juwura-terracotta hover:text-juwura-cream rounded-lg transition-all duration-200 block border border-transparent hover:border-juwura-cream/30"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}

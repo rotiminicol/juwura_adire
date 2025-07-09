@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, Home, ArrowRight } from "lucide-react";
 import { Product } from "@/types";
@@ -364,7 +364,7 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-juwura-cream via-white to-juwura-beige/50 pt-20">
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full px-0 sm:px-6 lg:px-8 py-8">
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -393,7 +393,7 @@ const ProductDetail = () => {
           </div>
         </motion.nav>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 w-full">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 w-full px-4 sm:px-0">
           <div className="relative fade-in-element opacity-0 w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -446,7 +446,7 @@ const ProductDetail = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="fade-in-element opacity-0 bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-2xl border border-juwura-gold/20 w-full"
+            className="fade-in-element opacity-0 bg-white/80 backdrop-blur-sm rounded-none sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-none sm:shadow-2xl border-0 sm:border border-juwura-gold/20 w-full"
           >
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 font-playfair text-juwura-brown">{product.name}</h1>
             <p className="text-juwura-terracotta text-2xl sm:text-3xl font-bold mb-6 bg-juwura-gold/10 px-4 py-2 rounded-xl inline-block">
@@ -541,87 +541,83 @@ const ProductDetail = () => {
                       Buy Now
                     </motion.button>
                   </DialogTrigger>
-                  <DialogContent
-                    className="w-[95vw] max-w-[500px] h-[90vh] max-h-[600px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl p-0 overflow-hidden z-50"
-                  >
-                    <motion.div
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.9, opacity: 0 }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                      className="w-full h-full bg-white rounded-2xl shadow-2xl overflow-hidden"
+                  <DialogContent className="w-[95vw] max-w-[450px] max-h-[80vh] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl shadow-2xl border border-juwura-gold/30 overflow-y-auto">
+                    <button
+                      onClick={() => setIsCheckoutOpen(false)}
+                      className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors z-10"
                     >
-                      <div className="bg-juwura-brown text-white px-6 py-4 flex items-center justify-between">
-                        <DialogHeader className="p-0">
-                          <DialogTitle className="text-xl font-playfair">Checkout</DialogTitle>
-                        </DialogHeader>
-                        <button 
-                          onClick={() => setIsCheckoutOpen(false)} 
-                          className="text-white hover:text-juwura-gold text-2xl font-bold focus:outline-none p-2 rounded-full hover:bg-white/10 transition-colors"
-                        >
-                          ×
-                        </button>
-                      </div>
-                      <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                        <div className="grid grid-cols-1 gap-4">
-                          <div>
-                            <Label htmlFor="name" className="text-left font-medium">Full Name</Label>
-                            <Input
-                              id="name"
-                              value={formData.name}
-                              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                              className="mt-2 py-3"
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor="email" className="text-left font-medium">Email</Label>
-                            <Input
-                              id="email"
-                              type="email"
-                              value={formData.email}
-                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                              className="mt-2 py-3"
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor="phone" className="text-left font-medium">Phone Number</Label>
-                            <Input
-                              id="phone"
-                              type="tel"
-                              value={formData.phone}
-                              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                              className="mt-2 py-3"
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor="address" className="text-left font-medium">Delivery Address</Label>
-                            <Input
-                              id="address"
-                              value={formData.address}
-                              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                              className="mt-2 py-3"
-                            />
-                          </div>
-                          <div>
-                            <Label className="text-left font-medium">Total Amount</Label>
-                            <p className="text-juwura-terracotta font-bold text-lg mt-2">
-                              ₦{(product.price * quantity).toLocaleString()}
-                            </p>
+                      <X className="w-5 h-5" />
+                    </button>
+                    
+                    <DialogHeader className="px-6 pt-6 pb-4">
+                      <DialogTitle className="text-2xl font-bold text-juwura-brown font-playfair">Complete Your Purchase</DialogTitle>
+                    </DialogHeader>
+                    
+                    <div className="px-6 pb-6">
+                      <div className="mb-6 p-4 bg-juwura-cream/30 rounded-xl border border-juwura-gold/20">
+                        <div className="flex items-center gap-4">
+                          <img src={product.images[0]} alt={product.name} className="w-16 h-16 object-cover rounded-lg" />
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-juwura-brown">{product.name}</h3>
+                            <p className="text-juwura-terracotta font-bold">₦{(product.price * quantity).toLocaleString()}</p>
+                            <p className="text-sm text-gray-600">Quantity: {quantity}</p>
                           </div>
                         </div>
                       </div>
-                      <div className="flex gap-3 p-6 border-t">
-                        <Button variant="outline" onClick={() => setIsCheckoutOpen(false)} className="flex-1">
-                          Cancel
-                        </Button>
+                      
+                      <form onSubmit={(e) => { e.preventDefault(); handleCheckoutSubmit(); }} className="space-y-4">
+                        <div>
+                          <Label htmlFor="name" className="text-juwura-brown font-medium">Full Name</Label>
+                          <Input
+                            id="name"
+                            type="text"
+                            value={formData.name}
+                            onChange={(e) => setFormData({...formData, name: e.target.value})}
+                            className="mt-1 border-juwura-brown/30 focus:border-juwura-brown rounded-lg"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="email" className="text-juwura-brown font-medium">Email</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            className="mt-1 border-juwura-brown/30 focus:border-juwura-brown rounded-lg"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="phone" className="text-juwura-brown font-medium">Phone Number</Label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                            className="mt-1 border-juwura-brown/30 focus:border-juwura-brown rounded-lg"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="address" className="text-juwura-brown font-medium">Delivery Address</Label>
+                          <Input
+                            id="address"
+                            type="text"
+                            value={formData.address}
+                            onChange={(e) => setFormData({...formData, address: e.target.value})}
+                            className="mt-1 border-juwura-brown/30 focus:border-juwura-brown rounded-lg"
+                            required
+                          />
+                        </div>
                         <Button
-                          onClick={handleCheckoutSubmit}
-                          className="bg-juwura-brown text-white hover:bg-juwura-terracotta flex-1"
+                          type="submit"
+                          className="w-full bg-juwura-brown text-white py-3 rounded-xl hover:bg-juwura-terracotta transition-colors font-semibold text-lg mt-6"
                         >
-                          Proceed to Payment
+                          Place Order - ₦{(product.price * quantity).toLocaleString()}
                         </Button>
-                      </div>
-                    </motion.div>
+                      </form>
+                    </div>
                   </DialogContent>
                 </Dialog>
               </div>

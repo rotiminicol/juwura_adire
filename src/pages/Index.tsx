@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
@@ -140,7 +141,9 @@ const Index = () => {
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-white/0 z-20" />
-        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-30">
+        
+        {/* Move dots below shop now button */}
+        <div className="absolute bottom-2 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-30">
           {heroImages.map((_, idx) => (
             <button
               key={idx}
@@ -152,6 +155,7 @@ const Index = () => {
             />
           ))}
         </div>
+        
         <div className="relative z-30 w-full flex flex-col items-center justify-center text-center px-4 sm:px-6">
           <img
             src="/lovable-uploads/d669e35d-f019-43a0-a333-cf7ef26df738.png"
@@ -162,7 +166,7 @@ const Index = () => {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 drop-shadow-lg">
             Discover Authentic Adire Fashion
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-md sm:max-w-xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-12 sm:mb-8 max-w-md sm:max-w-xl mx-auto">
             Shop unique, handcrafted pieces inspired by Nigerian heritage.
           </p>
           <Link to="/products">
@@ -195,9 +199,10 @@ const Index = () => {
           </p>
         </motion.div>
         
-        {/* Full width container for cards */}
+        {/* Full width container for cards - Mobile optimized */}
         <div className="w-full overflow-visible">
-          <div className="bg-white/95 border border-juwura-gold/30 rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 lg:p-16 mx-4 sm:mx-6 md:mx-8">
+          {/* Mobile: Full width container with no padding */}
+          <div className="md:bg-white/95 md:border md:border-juwura-gold/30 md:rounded-3xl md:shadow-2xl md:p-6 md:mx-4 sm:md:mx-6 lg:md:mx-8 w-full">
             <div className="w-full">
               {/* Desktop Grid - 4 cards per row, 2 rows = 8 cards total */}
               <div className="hidden md:grid grid-cols-4 gap-6 lg:gap-8">
@@ -215,9 +220,9 @@ const Index = () => {
                 ))}
               </div>
               
-              {/* Mobile Horizontal Scroll - Full width */}
-              <div className="md:hidden w-full">
-                <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2" style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
+              {/* Mobile: Full width cards with glow borders */}
+              <div className="md:hidden w-full px-0">
+                <div className="flex flex-col gap-6 w-full">
                   {sampleProducts.slice(0, 6).map((product, idx) => (
                     <motion.div
                       key={product.id}
@@ -225,10 +230,11 @@ const Index = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: idx * 0.08 }}
-                      className="fade-in-element opacity-0 flex-shrink-0"
-                      style={{ scrollSnapAlign: 'start' }}
+                      className="fade-in-element opacity-0 w-full px-4"
                     >
-                      <ProductCard {...product} cardClassName="w-[300px] h-[400px]" />
+                      <div className="w-full border-4 border-juwura-gold/30 rounded-2xl shadow-lg hover:shadow-2xl hover:border-juwura-gold/60 transition-all duration-300 bg-white">
+                        <ProductCard {...product} cardClassName="w-full h-[400px] border-0 shadow-none" />
+                      </div>
                     </motion.div>
                   ))}
                 </div>
