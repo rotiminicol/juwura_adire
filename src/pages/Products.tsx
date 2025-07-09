@@ -408,7 +408,7 @@ const Products = () => {
                               <ProductCard 
                                 {...product} 
                                 isNewArrival={product.isNewArrival} 
-                                cardClassName="w-full max-w-[360px] h-[520px] bg-white/95 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-juwura-gold/30 rounded-2xl transition-all duration-300" 
+                                cardClassName="w-full h-[520px] bg-white/95 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-juwura-gold/30 rounded-2xl transition-all duration-300" 
                               />
                             </motion.div>
                           ))}

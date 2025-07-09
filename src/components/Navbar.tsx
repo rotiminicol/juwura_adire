@@ -50,14 +50,10 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <Link to="/" className="relative z-50 group">
-            <motion.img 
-              src="/lovable-uploads/d669e35d-f019-43a0-a333-cf7ef26df738.png" 
-              alt="Jùwúrà Logo" 
-              className="h-10 md:h-12 lg:h-14 transition-transform duration-300 group-hover:scale-105" 
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            />
+          <Link to="/" className="relative z-50 group select-none">
+            <span className="font-playfair text-xl md:text-2xl lg:text-3xl font-bold text-juwura-brown tracking-wide">
+              Jùwúrà
+            </span>
           </Link>
 
           {/* Desktop Navigation */}

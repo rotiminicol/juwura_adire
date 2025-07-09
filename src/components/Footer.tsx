@@ -32,11 +32,11 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Your email address"
-              className="px-6 py-4 rounded-xl flex-grow bg-white/95 text-juwura-brown text-base sm:text-lg h-14 min-w-0 sm:min-w-[300px]"
+              className="px-6 py-4 rounded-xl w-full bg-white/95 text-juwura-brown text-base sm:text-lg h-14 min-w-0 sm:min-w-[300px]"
             />
             <button
               type="submit"
-              className="bg-juwura-gold text-juwura-brown hover:bg-juwura-cream px-8 py-4 text-lg sm:text-xl rounded-xl font-semibold h-14 transition-colors duration-300 w-full sm:w-auto"
+              className="bg-juwura-gold text-juwura-brown hover:bg-juwura-cream px-8 py-4 text-lg sm:text-xl rounded-xl font-semibold h-14 transition-colors duration-300 w-full sm:w-auto sm:min-w-[300px] flex justify-center items-center"
             >
               Subscribe
             </button>

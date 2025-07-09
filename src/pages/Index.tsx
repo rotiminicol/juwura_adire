@@ -202,7 +202,7 @@ const Index = () => {
         {/* Full width container for cards - Mobile optimized */}
         <div className="w-full overflow-visible">
           {/* Mobile: Full width container with no padding */}
-          <div className="md:bg-white/95 md:border md:border-juwura-gold/30 md:rounded-3xl md:shadow-2xl md:p-6 md:mx-4 sm:md:mx-6 lg:md:mx-8 w-full">
+          <div className="bg-gradient-to-r from-[#FEF7E5] via-[#FFF9F0] to-[#FEF7E5] border-2 border-juwura-gold/40 shadow-2xl py-10 px-2 md:px-8 w-screen max-w-none md:rounded-3xl relative left-1/2 -translate-x-1/2 mb-[40rem]">
             <div className="w-full">
               {/* Desktop Grid - 4 cards per row, 2 rows = 8 cards total */}
               <div className="hidden md:grid grid-cols-4 gap-6 lg:gap-8">
@@ -215,29 +215,26 @@ const Index = () => {
                     transition={{ duration: 0.6, delay: idx * 0.08 }}
                     className="fade-in-element opacity-0 flex justify-center"
                   >
-                    <ProductCard {...product} cardClassName="w-full h-[450px]" />
+                    <ProductCard {...product} cardClassName="w-[95%] h-[450px]" />
                   </motion.div>
                 ))}
               </div>
-              
               {/* Mobile: Full width cards with glow borders */}
-              <div className="md:hidden w-full px-0">
-                <div className="flex flex-col gap-6 w-full">
-                  {sampleProducts.slice(0, 6).map((product, idx) => (
-                    <motion.div
-                      key={product.id}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: idx * 0.08 }}
-                      className="fade-in-element opacity-0 w-full px-4"
-                    >
-                      <div className="w-full border-4 border-juwura-gold/30 rounded-2xl shadow-lg hover:shadow-2xl hover:border-juwura-gold/60 transition-all duration-300 bg-white">
-                        <ProductCard {...product} cardClassName="w-full h-[400px] border-0 shadow-none" />
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+              <div className="md:hidden flex flex-col gap-6 w-full">
+                {sampleProducts.slice(0, 6).map((product, idx) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: idx * 0.08 }}
+                    className="fade-in-element opacity-0 w-full px-4"
+                  >
+                    <div className="w-full p-2 bg-gradient-to-br from-[#FFF9F0] via-[#FEF7E5] to-[#FFF9F0] border-2 border-juwura-gold/60 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300">
+                      <ProductCard {...product} cardClassName="w-[95vw] max-w-[420px] h-[420px] border-0 shadow-none bg-white rounded-xl" />
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </div>
