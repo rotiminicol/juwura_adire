@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { motion, AnimatePresence } from "framer-motion";
 
 const ToastProvider = ToastPrimitives.Provider
 
@@ -44,13 +45,26 @@ const Toast = React.forwardRef<
     VariantProps<typeof toastVariants>
 >(({ className, variant, ...props }, ref) => {
   return (
-    <ToastPrimitives.Root
-      ref={ref}
-      className={cn(toastVariants({ variant }), className)}
-      {...props}
-    />
-  )
-})
+    <AnimatePresence>
+      <ToastPrimitives.Root
+        asChild
+        forceMount
+        {...props}
+      >
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 40 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          className={cn(toastVariants({ variant }), className, "focus:outline-none focus:ring-2 focus:ring-juwura-gold")}
+        >
+          {props.children}
+        </motion.div>
+      </ToastPrimitives.Root>
+    </AnimatePresence>
+  );
+});
 Toast.displayName = ToastPrimitives.Root.displayName
 
 const ToastAction = React.forwardRef<

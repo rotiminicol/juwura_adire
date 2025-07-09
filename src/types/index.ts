@@ -6,6 +6,7 @@ export interface Product {
   description: string;
   details: string[];
   category: string;
+  sizes?: string[]; // Optional: available sizes for the product
 }
 
 export interface CartItem {

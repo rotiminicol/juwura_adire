@@ -8,7 +8,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
 import { useToast } from "@/components/ui/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Product } from "@/types";
 
 const products: Product[] = [
@@ -19,7 +19,8 @@ const products: Product[] = [
     images: ["/wed2.png", "/wed2.png", "/wed2.png"],
     description: "Traditional hand-dyed top with authentic adire pattern. This versatile piece features a unique pattern created using the adire eleko technique, where cassava starch is applied by hand to create resist patterns before dyeing.",
     details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Women's Wear"
+    category: "Women's Wear",
+    sizes: ["S", "M", "L", "XL"]
   },
   {
     id: "2",
@@ -28,7 +29,8 @@ const products: Product[] = [
     images: ["/wed3.png", "/wed3.png", "/wed3.png"],
     description: "Modern shift dress with classic adire design. This elegant dress combines traditional adire patterning with a contemporary silhouette, perfect for both casual and semi-formal occasions.",
     details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Women's Wear"
+    category: "Women's Wear",
+    sizes: ["S", "M", "L", "XL"]
   },
   {
     id: "3",
@@ -46,7 +48,8 @@ const products: Product[] = [
     images: ["/wed5.png", "/wed5.png", "/wed5.png"],
     description: "Contemporary shirt with subtle adire detailing. This modern shirt features a unique adire pattern that adds a touch of Nigerian heritage to your wardrobe.",
     details: ["100% Cotton", "Natural indigo dye", "Machine wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Men's Wear"
+    category: "Men's Wear",
+    sizes: ["S", "M", "L", "XL"]
   },
   {
     id: "5",
@@ -64,7 +67,8 @@ const products: Product[] = [
     images: ["/wed7.png", "/wed7.png", "/wed7.png"],
     description: "Flowing maxi skirt with bold adire pattern. This elegant skirt combines traditional adire patterning with a contemporary silhouette.",
     details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Women's Wear"
+    category: "Women's Wear",
+    sizes: ["S", "M", "L", "XL"]
   },
   {
     id: "7",
@@ -213,7 +217,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const { addToCart } = useCart();
-  const { toast } = useToast();
+  const { toast, dismiss } = useToast();
   const navigate = useNavigate();
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -222,6 +226,7 @@ const ProductDetail = () => {
     phone: '',
     address: ''
   });
+  const [selectedSize, setSelectedSize] = useState("");
 
   useEffect(() => {
     const foundProduct = products.find(p => p.id === id);
@@ -259,12 +264,26 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!product) return;
-    addToCart(product.id, product.name, product.price, product.images[0], quantity);
-    toast({
+    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+      toast({
+        title: "Select a Size",
+        description: "Please select a size before adding to cart.",
+        variant: "destructive",
+        duration: 2500,
+      });
+      return;
+    }
+    addToCart(product.id, product.name + (selectedSize ? ` (${selectedSize})` : ""), product.price, product.images[0], quantity);
+    const t = toast({
       title: "Added to Cart",
-      description: `${quantity} x ${product.name} has been added to your cart.`,
+      description: `${quantity} x ${product.name}${selectedSize ? ` (${selectedSize})` : ""} has been added to your cart.`,
       variant: "default",
       duration: 3000,
+      action: (
+        <button onClick={() => dismiss(t.id)} className="ml-4 p-1 rounded-full hover:bg-gray-200">
+          <X className="w-4 h-4" />
+        </button>
+      ),
     });
   };
 
@@ -286,6 +305,15 @@ const ProductDetail = () => {
       });
       return;
     }
+    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+      toast({
+        title: "Select a Size",
+        description: "Please select a size before proceeding.",
+        variant: "destructive",
+        duration: 2500,
+      });
+      return;
+    }
     if (!product) return;
     setIsCheckoutOpen(false);
     navigate('/confirmation', {
@@ -293,7 +321,7 @@ const ProductDetail = () => {
         order: {
           items: [{
             id: product.id,
-            name: product.name,
+            name: product.name + (selectedSize ? ` (${selectedSize})` : ""),
             image: product.images[0],
             price: product.price,
             quantity: quantity
@@ -305,7 +333,7 @@ const ProductDetail = () => {
     });
     toast({
       title: "Order Placed",
-      description: `Your order for ${quantity} x ${product.name} has been placed. Please complete payment.`,
+      description: `Your order for ${quantity} x ${product.name}${selectedSize ? ` (${selectedSize})` : ""} has been placed. Please complete payment.`,
       variant: "default",
       duration: 3000,
     });
@@ -344,20 +372,16 @@ const ProductDetail = () => {
             className="mb-8 fade-in-element opacity-0"
             aria-label="Breadcrumb"
           >
-            <ol className="inline-flex items-center space-x-2 md:space-x-3 text-sm">
-              <li>
-                <Link to="/" className="text-gray-600 hover:text-juwura-brown transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li className="flex items-center">
+            <ol className="flex flex-row items-center space-x-2 md:space-x-3 text-sm w-full flex-nowrap whitespace-nowrap overflow-x-auto">
+              <li className="flex flex-row items-center">
+                <Link to="/" className="text-gray-600 hover:text-juwura-brown transition-colors">Home</Link>
                 <span className="mx-2 text-gray-400">/</span>
-                <Link to="/products" className="text-gray-600 hover:text-juwura-brown transition-colors">
-                  Products
-                </Link>
               </li>
-              <li aria-current="page" className="flex items-center">
+              <li className="flex flex-row items-center">
+                <Link to="/products" className="text-gray-600 hover:text-juwura-brown transition-colors">Products</Link>
                 <span className="mx-2 text-gray-400">/</span>
+              </li>
+              <li className="flex flex-row items-center" aria-current="page">
                 <span className="text-juwura-brown font-medium">{product.name}</span>
               </li>
             </ol>
@@ -424,18 +448,11 @@ const ProductDetail = () => {
               <p className="text-juwura-terracotta text-2xl font-medium mb-6">₦{product.price.toLocaleString()}</p>
               <p className="text-gray-700 mb-6 leading-relaxed">{product.description}</p>
               <div className="mb-8">
-                <h3 className="text-lg font-bold mb-3">Product Details</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
-                  {product.details.map((detail: string, index: number) => (
-                    <li key={index}>{detail}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mb-8">
+                {/* Quantity Selector */}
                 <label htmlFor="quantity" className="block text-sm font-medium mb-2">
                   Quantity
                 </label>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 mb-6">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -461,6 +478,40 @@ const ProductDetail = () => {
                     +
                   </motion.button>
                 </div>
+                {/* Size Selection as Pills */}
+                {product.sizes && product.sizes.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-8"
+                  >
+                    <div className="block text-base font-semibold mb-3">Select Size</div>
+                    <div className="flex flex-wrap w-full gap-2 overflow-x-auto justify-start">
+                      {product.sizes.map((size: string) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setSelectedSize(size)}
+                          className={`relative px-5 py-2 md:px-7 md:py-3 rounded-full border-2 text-base md:text-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-juwura-gold shadow-md
+                            ${selectedSize === size ? 'bg-juwura-brown text-white border-juwura-brown scale-105' : 'bg-white text-juwura-brown border-juwura-brown hover:bg-juwura-brown/10 hover:border-juwura-terracotta'}`}
+                        >
+                          {size}
+                          {selectedSize === size && (
+                            <span className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shadow-lg">✓</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+                {/* End Size Selection */}
+                <h3 className="text-lg font-bold mb-3">Product Details</h3>
+                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                  {product.details.map((detail: string, index: number) => (
+                    <li key={index}>{detail}</li>
+                  ))}
+                </ul>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <motion.button
@@ -481,110 +532,86 @@ const ProductDetail = () => {
                       Buy Now
                     </motion.button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[500px] rounded-2xl">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl font-playfair">Checkout</DialogTitle>
-                    </DialogHeader>
+                  <DialogContent
+                    className="max-w-full sm:max-w-[500px] rounded-t-xl sm:rounded-2xl p-0 overflow-hidden"
+                    asChild
+                  >
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="grid gap-4 py-4"
+                      initial={{ y: '100%', opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: '100%', opacity: 0 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-full sm:max-w-lg bg-white rounded-t-xl sm:rounded-t-2xl shadow-2xl z-50"
+                      style={{ maxHeight: '95vh', overflowY: 'auto' }}
                     >
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right font-medium">
-                          Full Name
-                        </Label>
-                        <Input
-                          id="name"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="col-span-3"
-                        />
+                      <div className="bg-juwura-brown text-white px-4 py-4 sm:px-6 flex items-center justify-between rounded-t-xl sm:rounded-t-2xl">
+                        <DialogHeader className="p-0">
+                          <DialogTitle className="text-lg sm:text-2xl font-playfair">Checkout</DialogTitle>
+                        </DialogHeader>
+                        <button onClick={() => setIsCheckoutOpen(false)} className="text-white hover:text-juwura-gold text-2xl font-bold focus:outline-none ml-2 sm:ml-4 p-2 sm:p-1 rounded-full">×</button>
                       </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="email" className="text-right font-medium">
-                          Email
-                        </Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="col-span-3"
-                        />
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="phone" className="text-right font-medium">
-                          Phone Number
-                        </Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="col-span-3"
-                        />
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="address" className="text-right font-medium">
-                          Delivery Address
-                        </Label>
-                        <Input
-                          id="address"
-                          value={formData.address}
-                          onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                          className="col-span-3"
-                        />
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="quantity" className="text-right font-medium">
-                          Quantity
-                        </Label>
-                        <div className="flex items-center space-x-2 col-span-3">
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="bg-gray-200 px-4 py-2 rounded-l-md"
-                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                          >
-                            -
-                          </motion.button>
-                          <input
-                            type="number"
-                            id="quantity"
-                            value={quantity}
-                            onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                            min="1"
-                            className="w-16 px-3 py-2 text-center border-y border-gray-200 rounded-none"
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="grid gap-4 py-4 px-3 sm:py-6 sm:px-6 bg-white"
+                      >
+                        <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-3 sm:gap-4">
+                          <Label htmlFor="name" className="text-left sm:text-right font-medium text-base sm:text-sm">Full Name</Label>
+                          <Input
+                            id="name"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            className="sm:col-span-3 text-base sm:text-sm py-3 sm:py-2"
                           />
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="bg-gray-200 px-4 py-2 rounded-r-md"
-                            onClick={() => setQuantity(quantity + 1)}
-                          >
-                            +
-                          </motion.button>
                         </div>
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right font-medium">Total Amount</Label>
-                        <p className="text-juwura-terracotta font-medium col-span-3">
-                          ₦{(product.price * quantity).toLocaleString()}
-                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-3 sm:gap-4">
+                          <Label htmlFor="email" className="text-left sm:text-right font-medium text-base sm:text-sm">Email</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            className="sm:col-span-3 text-base sm:text-sm py-3 sm:py-2"
+                          />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-3 sm:gap-4">
+                          <Label htmlFor="phone" className="text-left sm:text-right font-medium text-base sm:text-sm">Phone Number</Label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            className="sm:col-span-3 text-base sm:text-sm py-3 sm:py-2"
+                          />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-3 sm:gap-4">
+                          <Label htmlFor="address" className="text-left sm:text-right font-medium text-base sm:text-sm">Delivery Address</Label>
+                          <Input
+                            id="address"
+                            value={formData.address}
+                            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                            className="sm:col-span-3 text-base sm:text-sm py-3 sm:py-2"
+                          />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-3 sm:gap-4">
+                          <Label className="text-left sm:text-right font-medium text-base sm:text-sm">Total Amount</Label>
+                          <p className="text-juwura-terracotta font-medium sm:col-span-3 text-base sm:text-sm">
+                            ₦{(product.price * quantity).toLocaleString()}
+                          </p>
+                        </div>
+                      </motion.div>
+                      <div className="flex flex-col sm:flex-row justify-end gap-3 px-3 sm:px-6 pb-6 bg-white">
+                        <Button variant="outline" onClick={() => setIsCheckoutOpen(false)} className="rounded-full w-full sm:w-auto">
+                          Cancel
+                        </Button>
+                        <Button
+                          onClick={handleCheckoutSubmit}
+                          className="bg-juwura-brown text-white hover:bg-juwura-terracotta rounded-full w-full sm:w-auto"
+                        >
+                          Proceed to Payment
+                        </Button>
                       </div>
                     </motion.div>
-                    <div className="flex justify-end gap-3">
-                      <Button variant="outline" onClick={() => setIsCheckoutOpen(false)} className="rounded-full">
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={handleCheckoutSubmit}
-                        className="bg-juwura-brown text-white hover:bg-juwura-terracotta rounded-full"
-                      >
-                        Proceed to Payment
-                      </Button>
-                    </div>
                   </DialogContent>
                 </Dialog>
               </div>

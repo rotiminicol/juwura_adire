@@ -23,7 +23,7 @@ export function Toaster() {
               )}
             </div>
             {action}
-            <ToastClose />
+            {/* Removed default close button to avoid duplicate X buttons */}
           </Toast>
         )
       })}

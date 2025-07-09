@@ -1,12 +1,18 @@
 
 import { Link } from "react-router-dom";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-juwura-brown text-juwura-cream">
+    <motion.footer
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="bg-juwura-brown text-juwura-cream"
+    >
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -54,14 +60,14 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-3 text-juwura-cream/80">
                 <Mail className="w-5 h-5 text-juwura-gold" />
-                <a href="mailto:Jùwúrà@gmail.com" className="hover:text-juwura-gold transition-colors duration-300">
-                  Jùwúrà@gmail.com
+                <a href="mailto:info.juwura@gmail.com" className="hover:text-juwura-gold transition-colors duration-300">
+                  info.juwura@gmail.com
                 </a>
               </li>
               <li className="flex items-center space-x-3 text-juwura-cream/80">
                 <Phone className="w-5 h-5 text-juwura-gold" />
-                <a href="tel:+2348173183289" className="hover:text-juwura-gold transition-colors duration-300">
-                  +234 8173183289
+                <a href="tel:+2349160356477" className="hover:text-juwura-gold transition-colors duration-300">
+                  +234 9160356477
                 </a>
               </li>
             </ul>
@@ -72,11 +78,12 @@ const Footer = () => {
             <h3 className="text-xl font-semibold">Follow Us</h3>
             <div className="flex space-x-4">
               <a 
-                href="https://instagram.com/oreee_n" 
+                href="https://instagram.com/juwura.ng" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-juwura-gold/10 p-3 rounded-full hover:bg-juwura-gold/20 transition-all duration-300 group"
+                className="bg-juwura-gold/10 p-3 rounded-full hover:bg-juwura-gold/20 active:bg-juwura-gold/30 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-juwura-gold"
                 aria-label="Follow us on Instagram"
+                tabIndex={0}
               >
                 <Instagram className="w-6 h-6 text-juwura-gold group-hover:scale-110 transition-transform duration-300" />
               </a>
@@ -93,7 +100,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

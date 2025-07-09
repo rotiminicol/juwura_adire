@@ -2,21 +2,18 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ParallaxSection from "@/components/ParallaxSection";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "../components/ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 
-// Define product categories
 const categories = [
   "All",
   "Women's Wear",
   "Men's Wear",
   "Accessories",
   "Home Décor",
-  "New Arrivals"
+  "New Arrival"
 ];
-
-// Product data
 
 const products = [
   {
@@ -167,7 +164,6 @@ const products = [
     category: "Women's Wear"
   }
 ];
-    
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("All");
@@ -176,7 +172,7 @@ const Products = () => {
   useEffect(() => {
     if (activeTab === "All") {
       setFilteredProducts(products);
-    } else if (activeTab === "New Arrivals") {
+    } else if (activeTab === "New Arrival") {
       setFilteredProducts(products.filter(product => product.isNewArrival));
     } else {
       setFilteredProducts(products.filter(product => product.category === activeTab));
@@ -211,88 +207,114 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-juwura-cream">
       {/* Hero Section */}
-      <ParallaxSection
-        bgImage="https://images.unsplash.com/photo-1613280197550-bca3d1f29454?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
-        speed={0.3}
-        className="min-h-[60vh] flex items-center justify-center bg-juwura-brown/60"
-        spacing="large"
-      >
+      <section className="relative min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-juwura-brown/80 via-juwura-gold/10 to-juwura-cream overflow-hidden">
+        {/* Animated Layered Images */}
+        <motion.img
+          src="/wed2.png"
+          alt="Adire Hero 1"
+          initial={{ opacity: 0, y: 60, scale: 1.1 }}
+          animate={{ opacity: 0.18, y: 0, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.2 }}
+          className="absolute left-0 top-0 w-1/3 max-w-xs sm:max-w-sm md:max-w-md opacity-20 rotate-[-8deg] pointer-events-none select-none"
+        />
+        <motion.img
+          src="/wed3.png"
+          alt="Adire Hero 2"
+          initial={{ opacity: 0, y: -60, scale: 1.1 }}
+          animate={{ opacity: 0.16, y: 0, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+          className="absolute right-0 top-0 w-1/3 max-w-xs sm:max-w-sm md:max-w-md opacity-20 rotate-[7deg] pointer-events-none select-none"
+        />
+        <motion.img
+          src="/adire1.png"
+          alt="Adire Hero 3"
+          initial={{ opacity: 0, y: 60, scale: 1.1 }}
+          animate={{ opacity: 0.13, y: 0, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.6 }}
+          className="absolute left-1/4 bottom-0 w-1/4 max-w-xs opacity-20 rotate-[-3deg] pointer-events-none select-none"
+        />
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center text-white max-w-5xl mx-auto px-4"
+          className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 py-16"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 font-playfair">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 font-playfair drop-shadow-lg">
             Discover Our Adire Collection
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto drop-shadow">
             Experience the timeless beauty of Nigerian craftsmanship with our hand-dyed adire pieces.
           </p>
         </motion.div>
-      </ParallaxSection>
+      </section>
 
       {/* Products Section */}
-      <ParallaxSection bgColor="#FEF7E5" speed={0.1} spacing="xl">
-        <div className="container mx-auto px-4">
-          <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-transparent w-full flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
-              {categories.map((category) => (
-                <TabsTrigger
-                  key={category}
-                  value={category}
-                  className={`px-6 py-3 rounded-full font-medium text-sm md:text-base transition-all duration-300 ${
-                    activeTab === category
-                      ? "bg-juwura-brown text-white shadow-lg"
-                      : "bg-white text-juwura-brown hover:bg-juwura-brown/10"
-                  }`}
-                >
-                  {category}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            <AnimatePresence>
-              {categories.map((category) => (
-                <TabsContent key={category} value={category} className="mt-8">
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      <section className="w-full py-12 sm:py-16 bg-juwura-cream">
+        <div className="w-full mx-auto px-2 sm:px-6 md:max-w-[1800px]">
+          <div className="bg-white/95 border border-juwura-gold/30 rounded-3xl shadow-2xl p-2 sm:p-6 md:p-10 lg:p-12">
+            <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <TabsList
+                className="w-full flex gap-2 sm:gap-4 mb-8 sm:mb-12 px-1 sm:px-0 py-4 min-h-[72px] sticky top-0 z-20 border-b border-juwura-gold/20 bg-white/90 overflow-x-auto whitespace-nowrap md:overflow-x-visible md:whitespace-normal md:justify-center static-tabs-row relative"
+                style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}
+                aria-label="Product categories"
+              >
+                {categories.map((category) => (
+                  <TabsTrigger
+                    key={category}
+                    value={category}
+                    className={`px-5 sm:px-8 py-4 sm:py-5 rounded-full font-bold uppercase tracking-wider text-base sm:text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-juwura-gold ${activeTab === category ? "bg-juwura-brown text-white shadow-md" : "bg-white text-juwura-brown hover:bg-juwura-brown/10 border border-juwura-brown/20"}`}
+                    style={{ minWidth: '140px', marginRight: '4px', letterSpacing: '0.08em', minHeight: '56px' }}
+                    aria-label={`Show ${category} products`}
                   >
-                    {filteredProducts.map((product) => (
-                      <motion.div
-                        key={product.id}
-                        className="fade-in-element opacity-0"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <ProductCard {...product} isNewArrival={product.isNewArrival} />
-                      </motion.div>
-                    ))}
-                  </motion.div>
+                    {category}
+                  </TabsTrigger>
+                ))}
+                {/* Right gradient fade for mobile scroll hint */}
+                <div className="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white/90 to-transparent hidden md:block" />
+              </TabsList>
 
-                  {filteredProducts.length === 0 && (
+              <AnimatePresence>
+                {categories.map((category) => (
+                  <TabsContent key={category} value={category} className="mt-6 sm:mt-8">
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="text-center py-16 fade-in-element opacity-0"
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-14 justify-center items-stretch"
                     >
-                      <h3 className="text-2xl font-medium">No products found in this category</h3>
-                      <p className="mt-4 text-lg text-gray-600">
-                        Please check back later or explore other categories.
-                      </p>
+                      {filteredProducts.map((product, idx) => (
+                        <motion.div
+                          key={product.id}
+                          className="fade-in-element opacity-0 flex justify-center items-stretch"
+                          initial={{ y: 30, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ duration: 0.5, delay: idx * 0.08 }}
+                        >
+                          <ProductCard {...product} isNewArrival={product.isNewArrival} cardClassName="w-[440px] h-[600px] md:w-[440px] md:h-[600px]" />
+                        </motion.div>
+                      ))}
                     </motion.div>
-                  )}
-                </TabsContent>
-              ))}
-            </AnimatePresence>
-          </Tabs>
+
+                    {filteredProducts.length === 0 && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-center py-12 sm:py-16 fade-in-element opacity-0"
+                      >
+                        <h3 className="text-xl sm:text-2xl font-medium">No products found in this category</h3>
+                        <p className="mt-4 text-base sm:text-lg text-gray-600">
+                          Please check back later or explore other categories.
+                        </p>
+                      </motion.div>
+                    )}
+                  </TabsContent>
+                ))}
+              </AnimatePresence>
+            </Tabs>
+          </div>
         </div>
-      </ParallaxSection>
+      </section>
 
       {/* Custom Orders Section */}
       <ParallaxSection
@@ -304,27 +326,71 @@ const Products = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="bg-juwura-brown/80 text-white p-10 md:p-16 rounded-2xl max-w-4xl mx-auto text-center"
+          className="bg-juwura-brown/80 text-white p-8 sm:p-12 rounded-2xl max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-4xl font-bold mb-8 font-playfair fade-in-element opacity-0">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 font-playfair fade-in-element opacity-0">
             Create Your Unique Adire Piece
           </h2>
-          <p className="text-xl mb-10 fade-in-element opacity-0">
+          <p className="text-base sm:text-lg mb-8 sm:mb-10 fade-in-element opacity-0">
             Craft a bespoke adire masterpiece tailored to your style. Our artisans bring your vision to life with authentic techniques.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-juwura-cream text-juwura-brown px-8 py-3 rounded-full text-lg font-medium hover:bg-white transition-colors fade-in-element opacity-0"
+            className="bg-juwura-cream text-juwura-brown px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-medium hover:bg-white transition-colors fade-in-element opacity-0"
           >
             Inquire About Custom Orders
           </motion.button>
         </motion.div>
       </ParallaxSection>
+      {/* Hide scrollbars for horizontal filter list */}
+      <style>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        @media (min-width: 768px) {
+          .static-tabs-row {
+            overflow-x: visible !important;
+            white-space: normal !important;
+            justify-content: center !important;
+            background: #fff9f2 !important;
+            border-radius: 2rem !important;
+            box-shadow: 0 2px 16px 0 rgba(80,60,30,0.04);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            min-height: 72px !important;
+            align-items: center !important;
+          }
+        }
+        @media (max-width: 767px) {
+          .static-tabs-row {
+            overflow-x: auto !important;
+            white-space: nowrap !important;
+            justify-content: flex-start !important;
+            background: #fff9f2 !important;
+            border-radius: 2rem !important;
+            box-shadow: 0 2px 16px 0 rgba(80,60,30,0.04);
+            margin-left: 0;
+            margin-right: 0;
+            padding-left: 0.5rem;
+            padding-right: 2.5rem;
+            min-height: 72px !important;
+            align-items: center !important;
+            scrollbar-width: none !important;
+          }
+          .static-tabs-row::-webkit-scrollbar {
+            display: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
 export default Products;
-
-

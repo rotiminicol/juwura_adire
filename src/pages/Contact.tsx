@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ParallaxSection from "@/components/ParallaxSection";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -57,26 +58,42 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-juwura-cream/60 via-white to-juwura-cream/30 min-h-screen">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.7 }}
+      className="bg-gradient-to-b from-juwura-cream/60 via-white to-juwura-cream/30 min-h-screen"
+    >
       {/* Header */}
       <ParallaxSection
         bgImage="https://images.unsplash.com/photo-1622547748225-3fc4abd2cca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
         speed={0.3}
         className="min-h-[40vh] bg-juwura-brown/60 flex items-center"
       >
-        <div className="text-center text-white max-w-2xl mx-auto fade-in-element opacity-0">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-center text-white max-w-2xl mx-auto fade-in-element opacity-0"
+        >
           <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">Contact Us</h1>
           <p className="text-xl max-w-3xl mx-auto">
             We'd love to hear from you. Reach out to us for inquiries, collaborations, or feedback.
           </p>
-        </div>
+        </motion.div>
       </ParallaxSection>
 
       {/* Contact Form & Info */}
       <ParallaxSection bgColor="#FEF7E5" speed={0.2}>
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
-          <div className="fade-in-element opacity-0">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="fade-in-element opacity-0"
+          >
             <h2 className="text-3xl font-bold mb-8 text-juwura-brown">Send Us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-8 bg-white/80 rounded-2xl shadow-2xl p-8 backdrop-blur-md border border-juwura-brown/10">
               {/* Floating label fields */}
@@ -140,10 +157,16 @@ const Contact = () => {
                 </span>
               </Button>
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Information */}
-          <div className="fade-in-element opacity-0">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="fade-in-element opacity-0"
+          >
             <h2 className="text-3xl font-bold mb-8 text-juwura-brown">Get In Touch</h2>
             <div className="space-y-8">
               {/* Address */}
@@ -168,8 +191,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-medium mb-1">Email</h3>
-                  <a href="mailto:info@juwura.com" className="text-gray-600 hover:text-juwura-terracotta transition-colors">
-                    info@juwura.com
+                  <a href="mailto:info.juwura@gmail.com" className="text-gray-600 hover:text-juwura-terracotta transition-colors">
+                    info.juwura@gmail.com
                   </a>
                 </div>
               </div>
@@ -182,8 +205,25 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-medium mb-1">Phone</h3>
-                  <a href="tel:+2348000000000" className="text-gray-600 hover:text-juwura-terracotta transition-colors">
-                    +234 800 000 0000
+                  <a href="tel:+2349160356477" className="text-gray-600 hover:text-juwura-terracotta transition-colors">
+                    +234 9160356477
+                  </a>
+                </div>
+              </div>
+              {/* Instagram */}
+              <div className="flex items-start gap-4 group">
+                <div className="bg-juwura-brown text-white p-3 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  {/* Instagram SVG icon */}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2" fill="none" />
+                    <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" fill="none" />
+                    <circle cx="17" cy="7" r="1.5" fill="currentColor" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-medium mb-1">Instagram</h3>
+                  <a href="https://instagram.com/juwura.ng" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-juwura-terracotta transition-colors">
+                    @juwura.ng
                   </a>
                 </div>
               </div>
@@ -204,15 +244,21 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </ParallaxSection>
 
       {/* FAQs */}
       <ParallaxSection bgColor="#FEF7E5" speed={0.2}>
-        <h2 className="text-3xl font-bold mb-12 text-center text-juwura-brown fade-in-element opacity-0">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-3xl font-bold mb-12 text-center text-juwura-brown fade-in-element opacity-0"
+        >
           Frequently Asked Questions
-        </h2>
+        </motion.h2>
         <div className="max-w-3xl mx-auto space-y-6">
           {[
             {
@@ -232,13 +278,17 @@ const Contact = () => {
               a: "Yes, we offer custom-made adire pieces tailored to your specifications. Please contact us with your requirements for a quote and lead time estimate."
             }
           ].map((faq, idx) => (
-            <div
+            <motion.div
               key={faq.q}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.15 + idx * 0.08 }}
               className={`bg-white/90 p-6 rounded-xl shadow-md fade-in-element opacity-0 transition-all duration-700 ${idx % 2 === 0 ? "hover:scale-[1.02] hover:shadow-xl" : "hover:-translate-y-1 hover:shadow-2xl"}`}
             >
               <h3 className="text-xl font-bold mb-3 text-juwura-brown">{faq.q}</h3>
               <p className="text-gray-600">{faq.a}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </ParallaxSection>
@@ -271,7 +321,7 @@ const Contact = () => {
           animation: bounceIn 0.7s cubic-bezier(.4,2,.3,1) both;
         }
       `}</style>
-    </div>
+    </motion.div>
   );
 };
 
