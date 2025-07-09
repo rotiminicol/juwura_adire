@@ -8,7 +8,7 @@ import { Minus, Plus, ShoppingBag, Trash2, ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, updateQuantity, removeFromCart, clearCart, getCartTotal } = useCart();
+  const { cartItems, updateQuantity, removeFromCart, clearCart, total } = useCart();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Cart = () => {
       state: {
         order: {
           items: cartItems,
-          total: getCartTotal()
+          total: total
         },
         customer: {}
       }
@@ -75,7 +75,7 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-juwura-cream via-white to-juwura-beige/50 pt-20">
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full px-2 sm:px-4 lg:px-8 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -145,7 +145,7 @@ const Cart = () => {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => updateQuantity(item.id, item.name, Math.max(0, item.quantity - 1))}
+                                onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
                                 className="w-10 h-10 rounded-lg bg-white shadow-sm hover:bg-juwura-brown hover:text-white transition-colors"
                               >
                                 <Minus className="w-4 h-4" />
@@ -154,7 +154,7 @@ const Cart = () => {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => updateQuantity(item.id, item.name, item.quantity + 1)}
+                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                 className="w-10 h-10 rounded-lg bg-white shadow-sm hover:bg-juwura-brown hover:text-white transition-colors"
                               >
                                 <Plus className="w-4 h-4" />
@@ -168,7 +168,7 @@ const Cart = () => {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => removeFromCart(item.id, item.name)}
+                                onClick={() => removeFromCart(item.id)}
                                 className="text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg p-2 transition-colors"
                               >
                                 <Trash2 className="w-5 h-5" />
@@ -195,7 +195,7 @@ const Cart = () => {
                   <div className="space-y-4">
                     <div className="flex justify-between text-lg">
                       <span className="text-gray-600">Subtotal</span>
-                      <span className="font-semibold text-juwura-brown">₦{getCartTotal().toLocaleString()}</span>
+                      <span className="font-semibold text-juwura-brown">₦{total.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between text-lg">
                       <span className="text-gray-600">Shipping</span>
@@ -204,7 +204,7 @@ const Cart = () => {
                     <div className="border-t border-gray-200 pt-4">
                       <div className="flex justify-between text-xl sm:text-2xl font-bold">
                         <span className="text-juwura-brown">Total</span>
-                        <span className="text-juwura-terracotta">₦{getCartTotal().toLocaleString()}</span>
+                        <span className="text-juwura-terracotta">₦{total.toLocaleString()}</span>
                       </div>
                     </div>
                   </div>
