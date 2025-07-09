@@ -262,11 +262,11 @@ const Products = () => {
         </motion.div>
       </section>
 
-      {/* Enhanced Products Section - Full width on mobile */}
+      {/* Enhanced Products Section - Full width */}
       <section className="w-full py-16 sm:py-24 bg-gradient-to-b from-juwura-cream to-white">
-        <div className="w-full px-0 md:px-6">
+        <div className="w-full px-0">
           {/* Full width container on mobile, with background on desktop */}
-          <div className="md:bg-white/95 md:backdrop-blur-sm md:border md:border-juwura-gold/30 md:rounded-3xl md:shadow-2xl md:p-6 sm:md:p-8 lg:md:p-12 xl:md:p-16">
+          <div className="md:bg-white/95 md:backdrop-blur-sm md:border md:border-juwura-gold/30 md:rounded-none md:shadow-2xl md:p-6 sm:md:p-8 lg:md:p-12 xl:md:p-16">
             <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="w-full">
               
               {/* Desktop Category Filters */}
@@ -363,7 +363,7 @@ const Products = () => {
                         </p>
                       </motion.div>
 
-                      {/* Products Grid - Full width on mobile, single card per row */}
+                      {/* Products Grid - Full width */}
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -371,8 +371,8 @@ const Products = () => {
                         className="w-full"
                       >
                         {/* Mobile Grid - Full width, single card per row */}
-                        <div className="block md:hidden px-4">
-                          <div className="flex flex-col gap-6 w-full">
+                        <div className="block md:hidden w-full">
+                          <div className="flex flex-col gap-6 px-4">
                             {filteredProducts.map((product, idx) => (
                               <motion.div
                                 key={product.id}
@@ -394,8 +394,8 @@ const Products = () => {
                           </div>
                         </div>
 
-                        {/* Desktop Grid */}
-                        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-12 justify-center items-stretch">
+                        {/* Desktop Grid - Increased card width */}
+                        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 justify-center items-stretch px-8">
                           {filteredProducts.map((product, idx) => (
                             <motion.div
                               key={product.id}
@@ -408,7 +408,7 @@ const Products = () => {
                               <ProductCard 
                                 {...product} 
                                 isNewArrival={product.isNewArrival} 
-                                cardClassName="w-full max-w-[360px] h-[520px] bg-white/95 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-juwura-gold/30 rounded-2xl transition-all duration-300" 
+                                cardClassName="w-full max-w-[420px] h-[520px] bg-white/95 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-juwura-gold/30 rounded-2xl transition-all duration-300" 
                               />
                             </motion.div>
                           ))}
