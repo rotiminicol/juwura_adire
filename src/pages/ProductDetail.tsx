@@ -11,6 +11,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, Home, ArrowRight } from "lucide-react";
 import { Product } from "@/types";
 
+// Default sizes for all products
+const defaultSizes = ["S", "M", "L", "XL", "XXL", "XXXL"];
+
 const products: Product[] = [
   {
     id: "1",
@@ -18,9 +21,9 @@ const products: Product[] = [
     price: 15000,
     images: ["/wed2.png", "/wed2.png", "/wed2.png"],
     description: "Traditional hand-dyed top with authentic adire pattern. This versatile piece features a unique pattern created using the adire eleko technique, where cassava starch is applied by hand to create resist patterns before dyeing.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
     category: "Women's Wear",
-    sizes: ["S", "M", "L", "XL"]
+    sizes: defaultSizes
   },
   {
     id: "2", 
@@ -28,9 +31,9 @@ const products: Product[] = [
     price: 25000,
     images: ["/wed3.png", "/wed3.png", "/wed3.png"],
     description: "Modern shift dress with classic adire design. This elegant dress combines traditional adire patterning with a contemporary silhouette, perfect for both casual and semi-formal occasions.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
     category: "Women's Wear",
-    sizes: ["S", "M", "L", "XL"]
+    sizes: defaultSizes
   },
   {
     id: "3",
@@ -39,7 +42,8 @@ const products: Product[] = [
     images: ["/wed4.png", "/wed4.png", "/wed4.png"],
     description: "Luxurious silk scarf with traditional indigo pattern. This hand-dyed scarf features a classic adire pattern created using the tie-dye technique.",
     details: ["100% Silk", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Dimensions: 150cm x 30cm"],
-    category: "Accessories"
+    category: "Accessories",
+    sizes: defaultSizes
   },
   {
     id: "4",
@@ -47,9 +51,9 @@ const products: Product[] = [
     price: 18000,
     images: ["/wed5.png", "/wed5.png", "/wed5.png"],
     description: "Contemporary shirt with subtle adire detailing. This modern shirt features a unique adire pattern that adds a touch of Nigerian heritage to your wardrobe.",
-    details: ["100% Cotton", "Natural indigo dye", "Machine wash cold", "Made in Nigeria", "Available in sizes S-XL"],
+    details: ["100% Cotton", "Natural indigo dye", "Machine wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
     category: "Men's Wear",
-    sizes: ["S", "M", "L", "XL"]
+    sizes: defaultSizes
   },
   {
     id: "5",
@@ -58,7 +62,8 @@ const products: Product[] = [
     images: ["/wed6.png", "/wed6.png", "/wed6.png"],
     description: "Hand-dyed pillow cover with traditional pattern. This throw pillow features a classic adire pattern created using the tie-dye technique.",
     details: ["100% Cotton", "Natural indigo dye", "Machine wash cold", "Made in Nigeria", "Dimensions: 45cm x 45cm"],
-    category: "Home Décor"
+    category: "Home Décor",
+    sizes: defaultSizes
   },
   {
     id: "6",
@@ -66,9 +71,9 @@ const products: Product[] = [
     price: 22000,
     images: ["/wed7.png", "/wed7.png", "/wed7.png"],
     description: "Flowing maxi skirt with bold adire pattern. This elegant skirt combines traditional adire patterning with a contemporary silhouette.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
     category: "Women's Wear",
-    sizes: ["S", "M", "L", "XL"]
+    sizes: defaultSizes
   },
   {
     id: "7",
@@ -77,7 +82,8 @@ const products: Product[] = [
     images: ["/wed8.png", "/wed8.png", "/wed8.png"],
     description: "Unique bow tie with intricate adire pattern. This hand-dyed bow tie features a classic adire pattern created using the tie-dye technique.",
     details: ["100% Silk", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Dimensions: 15cm x 7cm"],
-    category: "Men's Wear"
+    category: "Men's Wear",
+    sizes: defaultSizes
   },
   {
     id: "8",
@@ -86,7 +92,8 @@ const products: Product[] = [
     images: ["/wed9.png", "/wed9.png", "/wed9.png"],
     description: "Elegant table runner for dining or display. This hand-dyed table runner features a classic adire pattern created using the tie-dye technique.",
     details: ["100% Cotton", "Natural indigo dye", "Machine wash cold", "Made in Nigeria", "Dimensions: 150cm x 40cm"],
-    category: "Home Décor"
+    category: "Home Décor",
+    sizes: defaultSizes
   },
   {
     id: "9",
@@ -95,7 +102,8 @@ const products: Product[] = [
     images: ["/wed2.png", "/wed2.png", "/wed2.png"],
     description: "Stylish clutch with traditional adire pattern. This hand-dyed clutch bag features a classic adire pattern created using the tie-dye technique.",
     details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Dimensions: 25cm x 15cm"],
-    category: "Accessories"
+    category: "Accessories",
+    sizes: defaultSizes
   },
   {
     id: "10",
@@ -103,8 +111,9 @@ const products: Product[] = [
     price: 15000,
     images: ["/wed3.png", "/wed3.png", "/wed3.png"],
     description: "Beautiful adire piece with intricate patterns. This hand-dyed piece features a unique adire pattern created using the tie-dye technique.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Women's Wear"
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Women's Wear",
+    sizes: defaultSizes
   },
   {
     id: "11",
@@ -112,8 +121,9 @@ const products: Product[] = [
     price: 20000,
     images: ["/adire11.png", "/adire11.png", "/adire11.png"],
     description: "Hand-dyed masterpiece with geometric patterns. This unique piece features a classic adire pattern created using the tie-dye technique.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Men's Wear"
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Men's Wear",
+    sizes: defaultSizes
   },
   {
     id: "12",
@@ -121,8 +131,9 @@ const products: Product[] = [
     price: 18000,
     images: ["/adire12.png", "/adire12.png", "/adire12.png"],
     description: "Modern take on traditional adire design. This contemporary piece combines traditional adire patterning with a modern silhouette.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Women's Wear"
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Women's Wear",
+    sizes: defaultSizes
   },
   {
     id: "13",
@@ -130,8 +141,9 @@ const products: Product[] = [
     price: 16000,
     images: ["/adire13.png", "/adire13.png", "/adire13.png"],
     description: "Classic adire pattern with contemporary twist. This hand-dyed piece features a classic adire pattern created using the tie-dye technique.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Accessories"
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Accessories",
+    sizes: defaultSizes
   },
   {
     id: "14",
@@ -139,8 +151,9 @@ const products: Product[] = [
     price: 19000,
     images: ["/adire14.png", "/adire14.png", "/adire14.png"],
     description: "Elegant adire piece for special occasions. This hand-dyed piece features a classic adire pattern created using the tie-dye technique.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Women's Wear"
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Women's Wear",
+    sizes: defaultSizes
   },
   {
     id: "15",
@@ -148,8 +161,9 @@ const products: Product[] = [
     price: 17000,
     images: ["/adire15.png", "/adire15.png", "/adire15.png"],
     description: "Hand-dyed adire with modern elements. This unique piece features a classic adire pattern created using the tie-dye technique.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Men's Wear"
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Men's Wear",
+    sizes: defaultSizes
   },
   {
     id: "16",
@@ -157,8 +171,9 @@ const products: Product[] = [
     price: 22000,
     images: ["/adire1.png", "/adire1.png", "/adire1.png"],
     description: "Luxury adire piece with premium materials. This hand-dyed piece features a classic adire pattern created using the tie-dye technique.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Women's Wear"
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Women's Wear",
+    sizes: defaultSizes
   },
   {
     id: "17",
@@ -166,9 +181,9 @@ const products: Product[] = [
     price: 18000,
     images: ["/adire18.png", "/adire18.png", "/adire18.png"],
     description: "Hand-dyed adire piece with geometric patterns. This unique piece features a modern take on traditional adire patterns, combining geometric shapes with natural indigo dye.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
     category: "Women's Wear",
-    sizes: ["S", "M", "L", "XL"]
+    sizes: defaultSizes
   },
   {
     id: "18",
@@ -176,8 +191,9 @@ const products: Product[] = [
     price: 25000,
     images: ["/wed.png", "/wed.png", "/wed.png"],
     description: "Elegant adire dress with contemporary design. This stunning dress combines traditional adire patterning with modern fashion sensibilities.",
-    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Women's Wear"
+    details: ["100% Cotton", "Natural indigo dye", "Hand wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Women's Wear",
+    sizes: defaultSizes
   }
 ];
 
@@ -188,8 +204,9 @@ const relatedProducts: Product[] = [
     price: 18000,
     images: ["/adire4.png"],
     description: "Contemporary shirt with subtle adire detailing.",
-    details: ["100% Cotton", "Natural indigo dye", "Machine wash cold", "Made in Nigeria", "Available in sizes S-XL"],
-    category: "Men's Wear"
+    details: ["100% Cotton", "Natural indigo dye", "Machine wash cold", "Made in Nigeria", "Available in sizes S-XXXL"],
+    category: "Men's Wear",
+    sizes: defaultSizes
   },
   {
     id: "5",
@@ -198,7 +215,8 @@ const relatedProducts: Product[] = [
     images: ["/adire5.png"],
     description: "Hand-dyed pillow cover with traditional pattern.",
     details: ["100% Cotton", "Natural indigo dye", "Machine wash cold", "Made in Nigeria", "Dimensions: 45cm x 45cm"],
-    category: "Home Décor"
+    category: "Home Décor",
+    sizes: defaultSizes
   },
   {
     id: "6",

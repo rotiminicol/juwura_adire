@@ -199,10 +199,10 @@ const Index = () => {
           </p>
         </motion.div>
         
-        {/* Full width container for cards - Mobile optimized */}
+        {/* Reduced width container for cards - Mobile optimized */}
         <div className="w-full overflow-visible">
-          {/* Mobile: Full width container with no padding */}
-          <div className="bg-gradient-to-r from-[#FEF7E5] via-[#FFF9F0] to-[#FEF7E5] border-2 border-juwura-gold/40 shadow-2xl py-10 px-2 md:px-8 w-screen max-w-none md:rounded-3xl relative left-1/2 -translate-x-1/2 mb-12">
+          {/* Mobile: Reduced width container with no padding */}
+          <div className="bg-gradient-to-r from-[#FEF7E5] via-[#FFF9F0] to-[#FEF7E5] border-2 border-juwura-gold/40 shadow-2xl py-10 px-2 md:px-8 w-[99.5%] max-w-[1600px] mx-auto md:rounded-3xl mb-12">
             <div className="w-full">
               {/* Desktop Grid - 4 cards per row, 2 rows = 8 cards total */}
               <div className="hidden md:grid grid-cols-4 gap-6 lg:gap-8">
