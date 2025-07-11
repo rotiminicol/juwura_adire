@@ -10,6 +10,8 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
+import Payment from "./pages/Payment";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import Confirmation from "./pages/Confirmation";
 import NotFound from "./pages/NotFound";
 import { CartProvider } from "./contexts/CartContext";
@@ -30,6 +32,8 @@ const App = () => (
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="/confirmation" element={<Confirmation />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />

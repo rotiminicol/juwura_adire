@@ -199,14 +199,14 @@ const Index = () => {
           </p>
         </motion.div>
         
-        {/* Container aligned with navbar boundaries */}
+        {/* Container aligned with navbar boundaries - Wider for desktop */}
         <div className="w-full overflow-visible">
-          {/* Use container mx-auto px-4 to match navbar alignment exactly */}
-          <div className="container mx-auto px-4">
+          {/* Use full width container for desktop, container for mobile */}
+          <div className="md:w-full md:px-8 lg:px-12 xl:px-16 container mx-auto px-2">
             <div className="bg-gradient-to-r from-[#FEF7E5] via-[#FFF9F0] to-[#FEF7E5] border-2 border-juwura-gold/40 shadow-2xl py-10 px-2 md:px-8 w-full max-w-none mx-auto md:rounded-3xl mb-12">
               <div className="w-full">
-                {/* Desktop Grid - 4 cards per row, 2 rows = 8 cards total */}
-                <div className="hidden md:grid grid-cols-4 gap-6 lg:gap-8">
+                {/* Desktop Grid - 4 cards per row, 2 rows = 8 cards total - Wider cards */}
+                <div className="hidden md:grid grid-cols-4 gap-4 lg:gap-6 xl:gap-8">
                   {sampleProducts.slice(0, 8).map((product, idx) => (
                     <motion.div
                       key={product.id}
@@ -216,12 +216,12 @@ const Index = () => {
                       transition={{ duration: 0.6, delay: idx * 0.08 }}
                       className="fade-in-element opacity-0 flex justify-center"
                     >
-                      <ProductCard {...product} cardClassName="w-[95%] h-[450px]" />
+                      <ProductCard {...product} cardClassName="w-full h-[450px] lg:h-[480px] xl:h-[500px]" />
                     </motion.div>
                   ))}
                 </div>
-                {/* Mobile: Full width cards with glow borders */}
-                <div className="md:hidden flex flex-col gap-6 w-full">
+                {/* Mobile: Wider container */}
+                <div className="md:hidden flex flex-col gap-6 w-full px-1">
                   {sampleProducts.slice(0, 6).map((product, idx) => (
                     <motion.div
                       key={product.id}
@@ -229,10 +229,10 @@ const Index = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: idx * 0.08 }}
-                      className="fade-in-element opacity-0 w-full px-4"
+                      className="fade-in-element opacity-0 w-full"
                     >
                       <div className="w-full p-2 bg-gradient-to-br from-[#FFF9F0] via-[#FEF7E5] to-[#FFF9F0] border-2 border-juwura-gold/60 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300">
-                        <ProductCard {...product} cardClassName="w-[95vw] max-w-[420px] h-[420px] border-0 shadow-none bg-white rounded-xl" />
+                        <ProductCard {...product} cardClassName="w-full max-w-none h-[420px] border-0 shadow-none bg-white rounded-xl" />
                       </div>
                     </motion.div>
                   ))}

@@ -51,23 +51,27 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
           <Link to="/" className="relative z-50 group select-none">
-            <span className="font-playfair text-xl md:text-2xl lg:text-3xl font-bold text-juwura-brown tracking-wide">
-              Jùwúrà
-            </span>
+            <img 
+              src="/public/lovable-uploads/d669e35d-f019-43a0-a333-cf7ef26df738.png" 
+              alt="Jùwúrà Logo" 
+              className="h-8 md:h-10 lg:h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8 lg:space-x-10">
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {[
-              { to: "/", label: "Home" },
-              { to: "/about", label: "About" },
-              { to: "/products", label: "Products" },
-              { to: "/contact", label: "Contact" }
+              { to: "/products", label: "All", category: "" },
+              { to: "/products?category=Women's Wear", label: "Women's Wear", category: "Women's Wear" },
+              { to: "/products?category=Men's Wear", label: "Men's Wear", category: "Men's Wear" },
+              { to: "/products?category=Accessories", label: "Accessories", category: "Accessories" },
+              { to: "/products?category=Home Décor", label: "Home Décor", category: "Home Décor" },
+              { to: "/products?new=true", label: "New Arrival", category: "new" }
             ].map((item) => (
               <motion.div key={item.to} whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
                 <Link 
                   to={item.to} 
-                  className="relative font-medium text-lg tracking-wide text-juwura-brown hover:text-juwura-terracotta transition-all duration-300 group"
+                  className="relative font-medium text-sm lg:text-base tracking-wide text-juwura-brown hover:text-juwura-terracotta transition-all duration-300 group whitespace-nowrap"
                 >
                   {item.label}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-juwura-terracotta transition-all duration-300 group-hover:w-full"></span>
@@ -145,23 +149,25 @@ const Navbar = () => {
             )}
           </AnimatePresence>
 
-          {/* Mobile Navigation - Better styling and contrast */}
+          {/* Mobile Navigation - Full screen with transition */}
           <motion.div
             data-menu-content
             initial={{ x: "100%" }}
             animate={{ x: mobileMenuOpen ? 0 : "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`fixed top-0 right-0 h-full w-3/4 sm:w-64 bg-juwura-brown shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+            className={`fixed inset-0 bg-juwura-brown shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
               mobileMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
             style={{ pointerEvents: mobileMenuOpen ? "auto" : "none" }}
           >
             <div className="flex flex-col p-8 pt-24 space-y-6 bg-juwura-brown h-full">
               {[
-                { to: "/", label: "Home" },
-                { to: "/about", label: "About" },
-                { to: "/products", label: "Products" },
-                { to: "/contact", label: "Contact" }
+                { to: "/products", label: "All", category: "" },
+                { to: "/products?category=Women's Wear", label: "Women's Wear", category: "Women's Wear" },
+                { to: "/products?category=Men's Wear", label: "Men's Wear", category: "Men's Wear" },
+                { to: "/products?category=Accessories", label: "Accessories", category: "Accessories" },
+                { to: "/products?category=Home Décor", label: "Home Décor", category: "Home Décor" },
+                { to: "/products?new=true", label: "New Arrival", category: "new" }
               ].map((item) => (
                 <motion.div
                   key={item.to}

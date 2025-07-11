@@ -335,24 +335,22 @@ const ProductDetail = () => {
     }
     if (!product) return;
     setIsCheckoutOpen(false);
-    navigate('/confirmation', {
+    navigate('/payment', {
       state: {
-        order: {
-          items: [{
-            id: product.id,
-            name: product.name + (selectedSize ? ` (${selectedSize})` : ""),
-            image: product.images[0],
-            price: product.price,
-            quantity: quantity
-          }],
-          total: product.price * quantity
-        },
-        customer: formData
+        items: [{
+          id: product.id,
+          name: product.name + (selectedSize ? ` (${selectedSize})` : ""),
+          image: product.images[0],
+          price: product.price,
+          quantity: quantity
+        }],
+        customer: formData,
+        total: product.price * quantity
       }
     });
     toast({
-      title: "Order Placed",
-      description: `Your order for ${quantity} x ${product.name}${selectedSize ? ` (${selectedSize})` : ""} has been placed. Please complete payment.`,
+      title: "Proceeding to Payment",
+      description: `Processing order for ${quantity} x ${product.name}${selectedSize ? ` (${selectedSize})` : ""}`,
       variant: "default",
       duration: 3000,
     });

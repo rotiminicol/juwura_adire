@@ -32,15 +32,7 @@ const Cart = () => {
       return;
     }
     
-    navigate('/confirmation', {
-      state: {
-        order: {
-          items: cartItems,
-          total: total
-        },
-        customer: {}
-      }
-    });
+    setCheckoutFormOpen(true);
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -55,19 +47,17 @@ const Cart = () => {
       return;
     }
     
-    navigate('/confirmation', {
+    navigate('/payment', {
       state: {
-        order: {
-          items: cartItems,
-          total: total
-        },
-        customer: formData
+        items: cartItems,
+        customer: formData,
+        total: total
       }
     });
     
     toast({
-      title: "Order Placed",
-      description: "Your order has been placed successfully!",
+      title: "Proceeding to Payment",
+      description: "Please complete payment to finalize your order.",
       variant: "default",
       duration: 3000,
     });
