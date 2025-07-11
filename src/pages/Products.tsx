@@ -273,20 +273,20 @@ const Products = () => {
               <div className="mb-12 sm:mb-16">
                 {/* Desktop Tabs */}
                 <div className="hidden md:block">
-                  <TabsList className="w-full flex flex-wrap justify-center gap-3 mb-8 sm:mb-12 p-3 min-h-[60px] bg-gradient-to-r from-juwura-gold/20 to-juwura-cream/40 backdrop-blur-sm rounded-2xl border border-juwura-gold/30 shadow-xl">
+                  <TabsList className="w-full flex-nowrap flex overflow-x-auto whitespace-nowrap gap-6 xl:gap-10 mb-8 sm:mb-12 p-4 min-h-[60px] bg-gradient-to-r from-juwura-gold/20 to-juwura-cream/40 backdrop-blur-sm rounded-2xl border border-juwura-gold/30 shadow-xl scrollbar-hide">
                     {categories.map((category) => {
                       const IconComponent = category.icon;
                       return (
                         <TabsTrigger
                           key={category.name}
                           value={category.name}
-                          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-juwura-gold shadow-md hover:shadow-lg h-12 ${
+                          className={`flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-lg xl:text-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-juwura-gold shadow-md hover:shadow-lg h-16 xl:h-20 xl:px-12 xl:py-6 ${
                             activeTab === category.name
-                              ? "bg-gradient-to-r from-juwura-brown to-juwura-terracotta text-white shadow-xl scale-105"
-                              : "bg-white/90 text-juwura-brown hover:bg-juwura-brown/10 border border-juwura-brown/20 hover:scale-102"
+                              ? "bg-gradient-to-r from-juwura-brown to-juwura-terracotta text-white shadow-xl scale-110"
+                              : "bg-white/90 text-juwura-brown hover:bg-juwura-brown/10 border border-juwura-brown/20 hover:scale-105"
                           }`}
                         >
-                          <IconComponent className="w-4 h-4" />
+                          <IconComponent className="w-6 h-6 xl:w-8 xl:h-8" />
                           <span>{category.name}</span>
                         </TabsTrigger>
                       );

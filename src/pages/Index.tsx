@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
@@ -158,7 +157,7 @@ const Index = () => {
         
         <div className="relative z-30 w-full flex flex-col items-center justify-center text-center px-4 sm:px-6">
           <img
-            src="/lovable-uploads/d669e35d-f019-43a0-a333-cf7ef26df738.png"
+            src="/juwura logo.png"
             alt="Jùwúrà Logo"
             className="h-12 sm:h-16 md:h-20 mb-6 sm:mb-8 drop-shadow-lg mt-8 sm:mt-0"
             draggable={false}
@@ -177,77 +176,87 @@ const Index = () => {
         </div>
       </motion.div>
 
-      {/* FEATURED COLLECTION */}
       <ParallaxSection
-        bgColor="#FEF7E5"
-        speed={0.25}
-        spacing="xl"
-        className="relative py-16 sm:py-24"
+  bgColor="#FEF7E5"
+  speed={0.25}
+  spacing="xl"
+  className="relative py-24 sm:py-32"
+>
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7, delay: 0.1 }}
+    className="text-center mb-12 sm:mb-16"
+  >
+    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-juwura-brown font-playfair">
+      Featured Collection
+    </h2>
+    <p className="text-lg sm:text-xl md:text-2xl text-juwura-brown/80 max-w-3xl mx-auto">
+      Explore our bestsellers and new arrivals
+    </p>
+  </motion.div>
+
+  {/* Wider, rectangular container */}
+  <div className="w-full px-4 sm:px-10 lg:px-20">
+    <div className="bg-white/95 backdrop-blur-sm border border-juwura-gold/30 rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-24 h-[620px] sm:h-[740px] lg:h-[840px] flex items-center relative">
+      {/* Sexy slide prompt */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 z-10"
       >
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-center mb-12 sm:mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-juwura-brown font-playfair">
-            Featured Collection
-          </h2>
-          <p className="text-lg sm:text-xl md:text-2xl text-juwura-brown/80 max-w-2xl mx-auto">
-            Explore our bestsellers and new arrivals
-          </p>
-        </motion.div>
-        
-        {/* Reduced width container for cards - Mobile optimized */}
-        <div className="w-full overflow-visible">
-          {/* Mobile: Reduced width container with no padding */}
-          <div className="bg-gradient-to-r from-[#FEF7E5] via-[#FFF9F0] to-[#FEF7E5] border-2 border-juwura-gold/40 shadow-2xl py-10 px-2 md:px-8 w-[99.5%] max-w-[1600px] mx-auto md:rounded-3xl mb-12">
-            <div className="w-full">
-              {/* Desktop Grid - 4 cards per row, 2 rows = 8 cards total */}
-              <div className="hidden md:grid grid-cols-4 gap-6 lg:gap-8">
-                {sampleProducts.slice(0, 8).map((product, idx) => (
-                  <motion.div
-                    key={product.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: idx * 0.08 }}
-                    className="fade-in-element opacity-0 flex justify-center"
-                  >
-                    <ProductCard {...product} cardClassName="w-[95%] h-[450px]" />
-                  </motion.div>
-                ))}
-              </div>
-              {/* Mobile: Full width cards with glow borders */}
-              <div className="md:hidden flex flex-col gap-6 w-full">
-                {sampleProducts.slice(0, 6).map((product, idx) => (
-                  <motion.div
-                    key={product.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: idx * 0.08 }}
-                    className="fade-in-element opacity-0 w-full px-4"
-                  >
-                    <div className="w-full p-2 bg-gradient-to-br from-[#FFF9F0] via-[#FEF7E5] to-[#FFF9F0] border-2 border-juwura-gold/60 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-transform duration-300">
-                      <ProductCard {...product} cardClassName="w-[95vw] max-w-[420px] h-[420px] border-0 shadow-none bg-white rounded-xl" />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+        <p className="text-juwura-brown text-sm sm:text-base lg:text-lg font-playfair italic font-semibold bg-juwura-gold/20 px-4 py-2 rounded-full shadow-md">
+          Slide to unveil more elegance
+        </p>
+      </motion.div>
+      {/* Carousel layout with wider cards */}
+      <motion.div
+        className="flex flex-row gap-8 sm:gap-12 lg:gap-24 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+        initial={{ x: 0 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {sampleProducts.slice(0, 8).map((product, idx) => (
+          <motion.div
+            key={product.id}
+            className="flex-none snap-start"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: idx * 0.1 }}
+            whileHover={{ scale: 1.05, y: -10 }}
+          >
+            <div className="relative w-[360px] sm:w-[420px] lg:w-[520px] h-[500px] sm:h-[560px] lg:h-[680px] rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white border-2 border-juwura-gold/30 hover:border-juwura-gold/60">
+              <ProductCard
+                {...product}
+                cardClassName="w-full h-full rounded-2xl border-0 shadow-none"
+              />
+              <motion.div
+                className="absolute inset-0 bg-juwura-brown/10 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-2xl"
+                whileHover={{ opacity: 1 }}
+              >
+                <Button className="bg-juwura-gold text-juwura-brown px-6 py-3 text-base sm:text-lg font-semibold rounded-lg shadow-md hover:bg-juwura-cream transition">
+                  View Details
+                </Button>
+              </motion.div>
             </div>
-          </div>
-        </div>
-        
-        <div className="text-center mt-12 sm:mt-16">
-          <Link to="/products">
-            <Button className="bg-juwura-brown text-juwura-cream px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-semibold rounded-xl hover:bg-juwura-terracotta transition shadow-lg">
-              View All Products
-            </Button>
-          </Link>
-        </div>
-      </ParallaxSection>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  </div>
+
+  <div className="text-center mt-12 sm:mt-16">
+    <Link to="/products">
+      <Button className="bg-juwura-brown text-juwura-cream px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-semibold rounded-xl hover:bg-juwura-terracotta transition shadow-lg">
+        View All Products
+      </Button>
+    </Link>
+  </div>
+</ParallaxSection>
     </motion.div>
   );
 };

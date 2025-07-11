@@ -29,7 +29,6 @@ const Confirmation = () => {
   const location = useLocation();
   const [order, setOrder] = useState<Order | null>(null);
   const [customer, setCustomer] = useState<Customer | null>(null);
-  const [showModal, setShowModal] = useState(true);
 
   useEffect(() => {
     if (location.state?.order) {
@@ -166,38 +165,6 @@ const Confirmation = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Payment Confirmation Modal with close button */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-3xl p-8 max-w-md w-full relative"
-          >
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            
-            <div className="text-center">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-juwura-brown mb-4">Payment Confirmation</h2>
-              <p className="text-gray-600 mb-6">
-                Your payment has been received! We'll process your order and send you tracking information soon.
-              </p>
-              <Button
-                onClick={() => setShowModal(false)}
-                className="bg-juwura-brown text-white px-6 py-3 rounded-xl hover:bg-juwura-terracotta transition-colors"
-              >
-                Got it, thanks!
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      )}
     </div>
   );
 };

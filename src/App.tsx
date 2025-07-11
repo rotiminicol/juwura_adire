@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import Confirmation from "./pages/Confirmation";
 import NotFound from "./pages/NotFound";
+import Payment from "./pages/Payment";
 import { CartProvider } from "./contexts/CartContext";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
               <Route path="/cart" element={<Cart />} />
               <Route path="/confirmation" element={<Confirmation />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/payment" element={<Payment />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>

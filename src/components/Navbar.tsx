@@ -50,10 +50,9 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <Link to="/" className="relative z-50 group select-none">
-            <span className="font-playfair text-xl md:text-2xl lg:text-3xl font-bold text-juwura-brown tracking-wide">
-              Jùwúrà
-            </span>
+          <Link to="/" className="relative z-50 group select-none flex items-center gap-2">
+            <img src="/juwura logo.png" alt="Jùwúrà Logo" className="h-16 w-auto sm:h-20 md:h-24 drop-shadow-xl" style={{maxWidth:'120px'}} />
+            <span className="sr-only">Jùwúrà</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -151,12 +150,12 @@ const Navbar = () => {
             initial={{ x: "100%" }}
             animate={{ x: mobileMenuOpen ? 0 : "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`fixed top-0 right-0 h-full w-3/4 sm:w-64 bg-juwura-brown shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+            className={`fixed top-0 left-0 w-full h-full bg-juwura-brown z-50 transform transition-transform duration-500 ease-in-out ${
               mobileMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
             style={{ pointerEvents: mobileMenuOpen ? "auto" : "none" }}
           >
-            <div className="flex flex-col p-8 pt-24 space-y-6 bg-juwura-brown h-full">
+            <div className="flex flex-col p-8 pt-24 space-y-6 bg-juwura-brown h-full w-full items-center justify-center">
               {[
                 { to: "/", label: "Home" },
                 { to: "/about", label: "About" },

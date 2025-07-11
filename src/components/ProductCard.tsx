@@ -45,7 +45,7 @@ const ProductCard = ({ id, name, price, image, description, isNewArrival = false
   return (
     <Link
       to={`/products/${id}`}
-      className={`group tilt-card bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl border border-juwura-gold/20 h-full relative product-card flex flex-col cursor-pointer w-full md:w-[440px] md:h-[600px] mb-10 ring-4 ring-juwura-gold/30 hover:ring-8 hover:ring-juwura-gold/60 focus:ring-8 focus:ring-juwura-gold/80`}
+      className={`group tilt-card bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl border border-juwura-gold/20 h-full relative product-card flex flex-col cursor-pointer w-full md:w-[420px] md:h-[520px] xl:w-[480px] xl:h-[600px] mb-10 ring-4 ring-juwura-gold/30 hover:ring-8 hover:ring-juwura-gold/60 focus:ring-8 focus:ring-juwura-gold/80`}
       tabIndex={0}
       aria-label={`View details for ${name}`}
       onMouseEnter={() => setIsHovered(true)}

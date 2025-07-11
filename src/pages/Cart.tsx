@@ -13,14 +13,6 @@ const Cart = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const [checkoutFormOpen, setCheckoutFormOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: ''
-  });
-
   const handleProceedToCheckout = () => {
     if (cartItems.length === 0) {
       toast({
@@ -32,48 +24,7 @@ const Cart = () => {
       return;
     }
     
-    navigate('/confirmation', {
-      state: {
-        order: {
-          items: cartItems,
-          total: total
-        },
-        customer: {}
-      }
-    });
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.address) {
-      toast({
-        title: "Incomplete Form",
-        description: "Please fill out all fields.",
-        variant: "destructive",
-        duration: 3000,
-      });
-      return;
-    }
-    
-    navigate('/confirmation', {
-      state: {
-        order: {
-          items: cartItems,
-          total: total
-        },
-        customer: formData
-      }
-    });
-    
-    toast({
-      title: "Order Placed",
-      description: "Your order has been placed successfully!",
-      variant: "default",
-      duration: 3000,
-    });
-    
-    setFormData({ name: '', email: '', phone: '', address: '' });
-    setCheckoutFormOpen(false);
+    navigate('/payment');
   };
 
   if (cartItems.length === 0) {
@@ -235,69 +186,9 @@ const Cart = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Checkout Form Modal with close button */}
-      {checkoutFormOpen && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-3xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto relative"
-          >
-            <button
-              onClick={() => setCheckoutFormOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            
-            <h2 className="text-2xl font-bold mb-6 text-juwura-brown">Checkout Information</h2>
-            <form onSubmit={handleFormSubmit} className="space-y-4">
-              <div>
-                <Label htmlFor="name" className="text-left font-medium">Full Name</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="mt-2 py-3"
-                />
-              </div>
-              <div>
-                <Label htmlFor="email" className="text-left font-medium">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="mt-2 py-3"
-                />
-              </div>
-              <div>
-                <Label htmlFor="phone" className="text-left font-medium">Phone Number</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="mt-2 py-3"
-                />
-              </div>
-              <div>
-                <Label htmlFor="address" className="text-left font-medium">Delivery Address</Label>
-                <Input
-                  id="address"
-                  value={formData.address}
-                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="mt-2 py-3"
-                />
-              </div>
-              <Button type="submit" className="w-full bg-juwura-brown text-white py-3 rounded-xl hover:bg-juwura-terracotta transition-colors">
-                Complete Order
-              </Button>
-            </form>
-          </motion.div>
-        </div>
-      )}
+      <div className="flex justify-end mt-8">
+        <Button onClick={() => navigate('/payment')}>Proceed to Payment</Button>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, Home, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Home, ArrowRight, ShoppingBag } from "lucide-react";
 import { Product } from "@/types";
 
 // Default sizes for all products
@@ -548,6 +548,15 @@ const ProductDetail = () => {
                   className="bg-juwura-brown text-white py-4 px-8 rounded-xl hover:bg-juwura-terracotta transition-colors shadow-lg font-semibold text-lg w-full"
                 >
                   Add to Cart
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={e => { e.preventDefault(); e.stopPropagation(); navigate('/payment', { state: { product } }); }}
+                  className="flex-1 bg-juwura-gold text-juwura-brown py-4 rounded-full font-semibold text-base hover:bg-juwura-cream focus:outline-none focus:ring-2 focus:ring-juwura-brown transition-colors shadow-md md:py-4 md:text-lg"
+                  aria-label="Buy now"
+                >
+                  Buy Now
                 </motion.button>
                 <Dialog open={isCheckoutOpen} onOpenChange={setIsCheckoutOpen}>
                   <DialogTrigger asChild>
