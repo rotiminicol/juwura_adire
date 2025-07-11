@@ -51,7 +51,7 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
           <Link to="/" className="relative z-50 group select-none flex items-center gap-2">
-            <img src="/juwura logo.png" alt="Jùwúrà Logo" className="h-16 w-auto sm:h-20 md:h-24 drop-shadow-xl" style={{maxWidth:'120px'}} />
+            <img src="/juwura logo.png" alt="Jùwúrà Logo" className="h-16 w-auto sm:h-20 md:h-24 drop-shadow-xl scale-125" style={{maxWidth:'240px'}} />
             <span className="sr-only">Jùwúrà</span>
           </Link>
 
