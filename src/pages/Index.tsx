@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import ParallaxSection from "@/components/ParallaxSection";
@@ -197,24 +198,25 @@ const Index = () => {
     </p>
   </motion.div>
 
-  {/* Wider, rectangular container */}
-  <div className="w-full mx-auto">
-    <div className="w-full">
-      {/* Sexy slide prompt */}
+  {/* Container aligned with navbar */}
+  <div className="container mx-auto px-4">
+    <div className="relative">
+      {/* Mobile and desktop slide prompt */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 z-10"
+        className="flex justify-center sm:justify-end mb-4 sm:mb-0 sm:absolute sm:top-4 sm:right-4 lg:top-8 lg:right-8 z-10"
       >
-        <p className="text-juwura-brown text-sm sm:text-base lg:text-lg font-playfair italic font-semibold bg-juwura-gold/20 px-4 py-2 rounded-full shadow-md">
+        <p className="text-juwura-brown text-sm sm:text-base lg:text-lg font-playfair italic font-semibold bg-juwura-gold/20 px-4 py-2 rounded-full shadow-md text-center">
           Slide to unveil more elegance
         </p>
       </motion.div>
-      {/* Carousel layout with wider cards */}
+      
+      {/* Carousel layout with responsive cards */}
       <motion.div
-        className="flex flex-row gap-8 sm:gap-12 lg:gap-24 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+        className="flex flex-row gap-4 sm:gap-8 lg:gap-12 xl:gap-16 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4"
         initial={{ x: 0 }}
         animate={{ x: 0 }}
         transition={{ duration: 0.5 }}
@@ -229,7 +231,7 @@ const Index = () => {
             transition={{ duration: 0.6, delay: idx * 0.1 }}
             whileHover={{ scale: 1.05, y: -10 }}
           >
-            <div className="relative w-[360px] sm:w-[420px] lg:w-[520px] h-[500px] sm:h-[560px] lg:h-[680px] rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white border-2 border-juwura-gold/30 hover:border-juwura-gold/60">
+            <div className="relative w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px] xl:w-[440px] h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px] rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white border-2 border-juwura-gold/30 hover:border-juwura-gold/60">
               <ProductCard
                 {...product}
                 cardClassName="w-full h-full rounded-2xl border-0 shadow-none"
