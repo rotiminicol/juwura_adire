@@ -126,8 +126,8 @@ const Confirmation = () => {
                   <span className="font-semibold">₦{order.total.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Shipping</span>
-                  <span className="font-semibold text-green-600">Free</span>
+                  <span>Delivery Fee</span>
+                  <span className="font-semibold">₦4,000</span>
                 </div>
                 <div className="border-t pt-4">
                   <div className="flex justify-between text-xl font-bold">
@@ -151,14 +151,14 @@ const Confirmation = () => {
             </div>
           </div>
 
-          <div className="text-center mt-8">
-            <Link to="/products">
-              <Button className="bg-juwura-brown text-white px-8 py-4 rounded-xl hover:bg-juwura-terracotta transition-colors shadow-lg text-lg mr-4">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
+            <Link to="/products" className="w-full sm:w-auto">
+              <Button className="w-full bg-juwura-brown text-white px-8 py-4 rounded-xl hover:bg-juwura-terracotta transition-colors shadow-lg text-lg">
                 Continue Shopping
               </Button>
             </Link>
-            <Link to="/">
-              <Button variant="outline" className="border-2 border-juwura-brown text-juwura-brown px-8 py-4 rounded-xl hover:bg-juwura-brown hover:text-white transition-colors text-lg">
+            <Link to="/" className="w-full sm:w-auto">
+              <Button variant="outline" className="w-full border-2 border-juwura-brown text-juwura-brown px-8 py-4 rounded-xl hover:bg-juwura-brown hover:text-white transition-colors text-lg">
                 Back to Home
               </Button>
             </Link>

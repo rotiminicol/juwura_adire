@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, clearCart, total } = useCart();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const DELIVERY_FEE = 4000;
 
   const handleProceedToCheckout = () => {
     if (cartItems.length === 0) {
@@ -154,13 +156,13 @@ const Cart = () => {
                     <span className="font-semibold text-juwura-brown">₦{total.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-lg">
-                    <span className="text-gray-600">Shipping</span>
-                    <span className="font-semibold text-green-600">Free</span>
+                    <span className="text-gray-600">Delivery Fee</span>
+                    <span className="font-semibold text-juwura-brown">₦{DELIVERY_FEE.toLocaleString()}</span>
                   </div>
                   <div className="border-t border-gray-200 pt-4">
                     <div className="flex justify-between text-xl sm:text-2xl font-bold">
                       <span className="text-juwura-brown">Total</span>
-                      <span className="text-juwura-terracotta">₦{total.toLocaleString()}</span>
+                      <span className="text-juwura-terracotta">₦{(total + DELIVERY_FEE).toLocaleString()}</span>
                     </div>
                   </div>
                 </div>
@@ -185,9 +187,6 @@ const Cart = () => {
             </div>
           </div>
         </motion.div>
-      </div>
-      <div className="flex justify-end mt-8">
-        <Button onClick={() => navigate('/payment')}>Proceed to Payment</Button>
       </div>
     </div>
   );
