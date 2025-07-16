@@ -201,22 +201,22 @@ const Index = () => {
   {/* Container aligned with navbar */}
   <div className="container mx-auto px-4">
     <div className="relative">
-      {/* Mobile and desktop slide prompt */}
+      {/* Mobile and desktop slide prompt - Fixed positioning */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="flex justify-center sm:justify-end mb-4 sm:mb-0 sm:absolute sm:top-4 sm:right-4 lg:top-8 lg:right-8 z-10"
+        className="flex justify-center mb-6 sm:mb-8 sm:justify-end sm:absolute sm:-top-2 sm:right-0 z-10"
       >
-        <p className="text-juwura-brown text-sm sm:text-base lg:text-lg font-playfair italic font-semibold bg-juwura-gold/20 px-4 py-2 rounded-full shadow-md text-center">
+        <p className="text-juwura-brown text-sm sm:text-base lg:text-lg font-playfair italic font-semibold bg-juwura-gold/20 px-4 py-2 rounded-full shadow-md text-center border border-juwura-gold/30">
           Slide to unveil more elegance
         </p>
       </motion.div>
       
       {/* Carousel layout with responsive cards */}
       <motion.div
-        className="flex flex-row gap-4 sm:gap-8 lg:gap-12 xl:gap-16 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4"
+        className="flex flex-row gap-4 sm:gap-8 lg:gap-12 xl:gap-16 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 pt-4 sm:pt-8"
         initial={{ x: 0 }}
         animate={{ x: 0 }}
         transition={{ duration: 0.5 }}
