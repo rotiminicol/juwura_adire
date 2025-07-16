@@ -198,8 +198,8 @@ const Index = () => {
   </motion.div>
 
   {/* Wider, rectangular container */}
-  <div className="w-full px-4 sm:px-10 lg:px-20">
-    <div className="bg-white/95 backdrop-blur-sm border border-juwura-gold/30 rounded-3xl shadow-2xl p-8 sm:p-12 lg:p-24 h-[620px] sm:h-[740px] lg:h-[840px] flex items-center relative">
+  <div className="w-full mx-auto">
+    <div className="w-full">
       {/* Sexy slide prompt */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
